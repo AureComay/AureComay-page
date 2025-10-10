@@ -1,0 +1,25 @@
+body {
+        background-image: url(Img/StarfieldSimulation.gif);
+        background-color: #000000;
+        background-size: contain;
+        color: #ffffff;
+}
+
+h1 {
+    text-align: center;
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #CBF31B, #fca330, #ff5e49);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
+    background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+0%,100% {background-position: 0 0;}
+50% {background-position: 100% 0;}
+}
+
+a:hover {
+    text-decoration: overline;
+}
