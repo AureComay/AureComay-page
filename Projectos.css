@@ -1,0 +1,71 @@
+/* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Bytesized&family=Jacquard+12&family=Pixelify+Sans:wght@400..700&family=Tiny5&display=swap');
+/* CSS */
+
+body {
+    background-image: url(Img/StarfieldSimulation.gif);
+    background-color: #000000;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #ffffff;
+}
+
+h1 {
+    font-size: 50px;
+    font-family: 'Tiny5';
+    margin-top: 10px;
+    text-align: center;
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #CBF31B, #fca330, #ff5e49);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
+    background-size: 400% 100%;
+}
+
+h2 {
+    font-family: 'Bytesized', sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, #33337a, #336180 , #0c640c, #65790e, #7a5018, #66261d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
+    background-size: 400% 100%;
+}
+
+
+@keyframes rainbow_animation {
+0%,100% {background-position: 0 0;}
+50% {background-position: 100% 0;}
+}
+
+a:hover {
+    margin-top: 10px;
+    text-align: center;
+    background: linear-gradient(to right, #ff0000, #d0ff00 , #00ff00, #1bc1f3, #0011ff, #6200ff, #da0098, #ff0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
+    background-size: 400% 100%;
+}
+
+a {
+    color: #00ff00;
+}
+
+.Links {
+    text-align: center;
+    background: #7000cc67;
+    margin: auto;
+    width: 30%;
+    height: 20%;
+    margin-top: 16%;
+    margin-bottom: 15%;
+}
+
+footer {
+    text-align: center;
+    text-shadow: 0 0 10px #ffffff;
+}
