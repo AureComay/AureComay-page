@@ -24,7 +24,6 @@ h1 {
 }
 
 h2 {
-    font-size: 500px
     font-family: 'Bytesized', sans-serif;
     text-align: center;
     background: linear-gradient(to right, #33337a, #336180 , #0c640c, #65790e, #7a5018, #66261d);
@@ -71,4 +70,5 @@ footer {
     text-shadow: 0 0 10px #ffffff;
 
 }
+
 
