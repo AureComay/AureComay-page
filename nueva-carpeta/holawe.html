@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Encriptador — Binario · Hex · Base64 · Más</title>
+  <style>
+    :root{
+      --bg:#0a0a0f;
+      --card:#141420;
+      --accent:#6366f1;
+      --muted:#9ca3af;
+      --text:#f4f4f5;
+      --border:#1f2937;
+      --shadow:0 8px 30px rgba(0,0,0,0.7);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+    }
+    .card{
+      width:1050px;max-width:100%;
+      background:var(--card);
+      border-radius:12px;
+      padding:22px;
+      box-shadow:var(--shadow);
+      border:1px solid var(--border);
+    }
+    h1{font-size:22px;margin-bottom:6px;color:var(--text)}
+    p.lead{color:var(--muted);margin-bottom:12px;font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}
+    textarea,input{
+      width:100%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid var(--border);
+      background:#0b0b12;
+      color:var(--text);
+      font-size:14px;
+      min-height:120px;
+      resize:vertical;
+    }
+    .controls{display:flex;gap:8px;align-items:center;margin:10px 0;flex-wrap:wrap}
+    button{background:var(--accent);color:white;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600;transition:background 0.2s}
+    button:hover{background:#4f46e5}
+    button.secondary{background:transparent;border:1px solid var(--border);color:var(--muted)}
+    .small{font-size:12px;padding:6px 8px;border-radius:6px}
+    .modes{display:flex;gap:6px;flex-wrap:wrap}
+    .output{min-height:120px;white-space:pre-wrap;word-break:break-word}
+    .footer{margin-top:12px;color:var(--muted);font-size:12px}
+    .copy-btn{margin-left:auto}
+    .group-title{color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:6px}
+    @media(max-width:990px){.card{width:100%}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Encriptador — Binario · Hexadecimal · Base64 · +</h1>
+    <p class="lead">Modo oscuro 🌙 — Ahora con Base32, Morse, SHA-1, SHA-256, Leet (1337), ASCII, Octal y ROT13.</p>
+
+    <div class="grid">
+      <div>
+        <label for="inputText">Texto de entrada</label>
+        <textarea id="inputText" placeholder="Escribe o pega aquí el texto...">Hola, mundo — ¡ñ, ü y emojis 👍}</textarea>
+
+        <div class="group-title">Conversión reversible</div>
+        <div class="controls">
+          <div class="modes">
+            <button class="small" id="encodeBinary">→ Binario</button>
+            <button class="small" id="decodeBinary">← Binario</button>
+          </div>
+          <div class="modes">
+            <button class="small" id="encodeHex">→ Hex</button>
+            <button class="small" id="decodeHex">← Hex</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="modes">
+            <button class="small" id="encodeBase64">→ Base64</button>
+            <button class="small" id="decodeBase64">← Base64</button>
+          </div>
+          <div class="modes">
+            <button class="small" id="encodeBase32">→ Base32</button>
+            <button class="small" id="decodeBase32">← Base32</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="modes">
+            <button class="small" id="encodeMorse">→ Morse</button>
+            <button class="small" id="decodeMorse">← Morse</button>
+          </div>
+          <div class="modes">
+            <button class="small" id="encodeAscii">→ ASCII (dec)</button>
+            <button class="small" id="decodeAscii">← ASCII (dec)</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="modes">
+            <button class="small" id="encodeOctal">→ Octal</button>
+            <button class="small" id="decodeOctal">← Octal</button>
+          </div>
+          <div class="modes">
+            <button class="small" id="rot13">ROT13</button>
+            <button class="small" id="leetEncode">→ 1337</button>
+            <button class="small" id="leetDecode">← 1337</button>
+          </div>
+        </div>
+
+        <div class="group-title">Hashes (unidireccionales)</div>
+        <div class="controls">
+          <button class="small" id="sha1">SHA-1</button>
+          <button class="small" id="sha256">SHA-256</button>
+          <button class="secondary small" id="clearInput">Limpiar</button>
+        </div>
+      </div>
+
+      <div>
+        <label for="outputText">Resultado</label>
+        <textarea id="outputText" class="output" readonly placeholder="Aquí aparecerá el resultado..."></textarea>
+
+        <div class="controls">
+          <button id="swap" class="small">Intercambiar (input ⇄ output)</button>
+          <button id="copyOutput" class="small copy-btn">Copiar resultado</button>
+        </div>
+
+        <div class="footer">Soporta UTF-8 completo. Morse usa espacios entre letras y '/' para separar palabras. ASCII, Octal y Binario aceptan espacios o texto continuo.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Helpers UTF-8
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
+
+    // Binary
+    function bytesToBinary(bytes){return Array.from(bytes).map(b=>b.toString(2).padStart(8,'0')).join(' ')}
+    function binaryToBytes(str){
+      const cleaned = str.trim();
+      if(!cleaned) return new Uint8Array();
+      const only01 = cleaned.replace(/[^01]/g,'');
+      if(only01.length % 8 === 0 && only01.length===cleaned.replace(/\s+/g,'').length){
+        return new Uint8Array(only01.match(/.{1,8}/g).map(g=>parseInt(g,2)));
+      }
+      const tokens = cleaned.split(/\s+/).filter(Boolean);
+      if(tokens.every(t=>/^[01]+$/.test(t))) return new Uint8Array(tokens.map(t=>parseInt(t,2)));
+      throw new Error('Formato binario inválido. Use grupos de 8 bits o espacios entre bytes.');
+    }
+
+    // Hex
+    function bytesToHex(bytes){return Array.from(bytes).map(b=>b.toString(16).padStart(2,'0')).join('')}
+    function hexToBytes(str){const cleaned=str.trim().replace(/[^0-9a-fA-F]/g,'');if(cleaned.length%2!==0)throw new Error('Longitud de hex inválida');const arr=new Uint8Array(cleaned.length/2);for(let i=0;i<cleaned.length;i+=2)arr[i/2]=parseInt(cleaned.substr(i,2),16);return arr}
+
+    // Base64 (unicode-safe)
+    function textToBase64Unicode(str){const bytes=encoder.encode(str);let bin='';for(let b of bytes)bin+=String.fromCharCode(b);return btoa(bin)}
+    function base64ToTextUnicode(b64){const bin=atob(b64);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return decoder.decode(bytes)}
+
+    // Base32 (RFC4648)
+    const B32_ALPH='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'.split('');
+    function bytesToBase32(bytes){
+      if(bytes.length===0) return '';
+      let bits=''; for(let b of bytes) bits+=b.toString(2).padStart(8,'0');
+      while(bits.length%5!==0) bits += '0';
+      let out=''; for(let i=0;i<bits.length;i+=5){ out += B32_ALPH[parseInt(bits.substr(i,5),2)]; }
+      // padding
+      while(out.length%8!==0) out += '=';
+      return out;
+    }
+    function base32ToBytes(str){
+      const cleaned=str.trim().replace(/=+$/,'').replace(/[^A-Z2-7]/gi,'').toUpperCase();
+      if(cleaned.length===0) return new Uint8Array();
+      let bits=''; for(let ch of cleaned){ const idx=B32_ALPH.indexOf(ch); if(idx<0) throw new Error('Base32 inválida'); bits += idx.toString(2).padStart(5,'0'); }
+      // trim extra bits to multiple of 8
+      const excess = bits.length % 8; if(excess!==0) bits = bits.substr(0,bits.length - excess);
+      const bytes=[]; for(let i=0;i<bits.length;i+=8) bytes.push(parseInt(bits.substr(i,8),2));
+      return new Uint8Array(bytes);
+    }
+
+    // Morse
+    const MORSE_MAP = {
+      'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..','J':'.---','K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-','U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..',
+      '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-','5':'.....','6':'-....','7':'--...','8':'---..','9':'----.',' ':'/' ,'.':'.-.-.-',',':'--..--','?':'..--..','!':'-.-.--','-':'-....-','/':'-..-.', '@':'.--.-.' ,':':'---...','(':'-.--.',')':'-.--.-'  };
+    const MORSE_INV = Object.fromEntries(Object.entries(MORSE_MAP).map(([k,v])=>[v,k]));
+    function textToMorse(str){ return str.toUpperCase().split('').map(ch=>MORSE_MAP[ch]||'?').join(' '); }
+    function morseToText(morse){
+      if(!morse.trim()) return '';
+      return morse.split(' / ').map(word=>word.split(/\s+/).map(s=>MORSE_INV[s]||'?').join('')).join(' ');
+    }
+
+    // ASCII codes (decimal)
+    function bytesToAscii(bytes){ return Array.from(bytes).map(b=>b.toString(10)).join(' ') }
+    function asciiToBytes(str){ const toks=str.trim().split(/\s+/).filter(Boolean); if(toks.length===0) throw new Error('ASCII vacío'); const arr=new Uint8Array(toks.length); for(let i=0;i<toks.length;i++){ const n=parseInt(toks[i],10); if(Number.isNaN(n)||n<0||n>255) throw new Error('Código ASCII inválido: '+toks[i]); arr[i]=n } return arr }
+
+    // Octal
+    function bytesToOctal(bytes){ return Array.from(bytes).map(b=>b.toString(8).padStart(3,'0')).join(' ') }
+    function octalToBytes(str){ const cleaned=str.trim(); if(!cleaned) return new Uint8Array(); const tokens=cleaned.split(/\s+/).filter(Boolean); // accept groups of 3 if no spaces
+      if(tokens.length===1 && tokens[0].length%3===0){ const t=[]; for(let i=0;i<tokens[0].length;i+=3) t.push(tokens[0].substr(i,3)); return new Uint8Array(t.map(s=>parseInt(s,8))); }
+      if(tokens.every(t=>/^[0-7]+$/.test(t))) return new Uint8Array(tokens.map(t=>parseInt(t,8)));
+      throw new Error('Formato octal inválido'); }
+
+    // ROT13
+    function rot13(s){ return s.replace(/[a-zA-Z]/g,c=>String.fromCharCode((c<='Z'?65:97)+((c.charCodeAt(0)-(c<='Z'?65:97)+13)%26))) }
+
+    // Leet (simple)
+    const LEET_MAP = { 'A':'4','B':'8','E':'3','G':'6','I':'1','L':'1','O':'0','S':'5','T':'7','Z':'2' };
+    const LEET_INV = Object.fromEntries(Object.entries(LEET_MAP).map(([k,v])=>[v,k]));
+    function toLeet(s){ return s.split('').map(ch=>{ const up=ch.toUpperCase(); return LEET_MAP[up] ? (ch===up?LEET_MAP[up]:LEET_MAP[up]) : ch }).join('') }
+    function fromLeet(s){ return s.split('').map(ch=>LEET_INV[ch]||ch).join('') }
+
+    // Hashes
+    async function digestHex(alg, str){ const data=encoder.encode(str); const hash=await crypto.subtle.digest(alg, data); const bytes=new Uint8Array(hash); return Array.from(bytes).map(b=>b.toString(16).padStart(2,'0')).join('') }
+
+    // DOM
+    const input = document.getElementById('inputText');
+    const output = document.getElementById('outputText');
+    const copyBtn = document.getElementById('copyOutput');
+
+    function showResult(value){ output.value = value }
+    function showError(e){ output.value = 'Error: '+ (e && e.message ? e.message : String(e)) }
+
+    // Event bindings
+    document.getElementById('encodeBinary').onclick = ()=>{ try{ showResult(bytesToBinary(encoder.encode(input.value))); }catch(e){ showError(e) } }
+    document.getElementById('decodeBinary').onclick = ()=>{ try{ showResult(decoder.decode(binaryToBytes(input.value))); }catch(e){ showError(e) } }
+
+    document.getElementById('encodeHex').onclick = ()=>{ try{ showResult(bytesToHex(encoder.encode(input.value))); }catch(e){ showError(e) } }
+    document.getElementById('decodeHex').onclick = ()=>{ try{ showResult(decoder.decode(hexToBytes(input.value))); }catch(e){ showError(e) } }
+
+    document.getElementById('encodeBase64').onclick = ()=>{ try{ showResult(textToBase64Unicode(input.value)); }catch(e){ showError(e) } }
+    document.getElementById('decodeBase64').onclick = ()=>{ try{ showResult(base64ToTextUnicode(input.value.trim())); }catch(e){ showError(e) } }
+
+    document.getElementById('encodeBase32').onclick = ()=>{ try{ showResult(bytesToBase32(encoder.encode(input.value))); }catch(e){ showError(e) } }
+    document.getElementById('decodeBase32').onclick = ()=>{ try{ showResult(decoder.decode(base32ToBytes(input.value))); }catch(e){ showError(e) } }
+
+    document.getElementById('encodeMorse').onclick = ()=>{ try{ showResult(textToMorse(input.value)); }catch(e){ showError(e) } }
+    document.getElementById('decodeMorse').onclick = ()=>{ try{ showResult(morseToText(input.value)); }catch(e){ showError(e) } }
+
+    document.getElementById('encodeAscii').onclick = ()=>{ try{ showResult(bytesToAscii(encoder.encode(input.value))); }catch(e){ showError(e) } }
+    document.getElementById('decodeAscii').onclick = ()=>{ try{ showResult(decoder.decode(asciiToBytes(input.value))); }catch(e){ showError(e) } }
+
+    document.getElementById('encodeOctal').onclick = ()=>{ try{ showResult(bytesToOctal(encoder.encode(input.value))); }catch(e){ showError(e) } }
+    document.getElementById('decodeOctal').onclick = ()=>{ try{ showResult(decoder.decode(octalToBytes(input.value))); }catch(e){ showError(e) } }
+
+    document.getElementById('rot13').onclick = ()=>{ try{ showResult(rot13(input.value)); }catch(e){ showError(e) } }
+    document.getElementById('leetEncode').onclick = ()=>{ try{ showResult(toLeet(input.value)); }catch(e){ showError(e) } }
+    document.getElementById('leetDecode').onclick = ()=>{ try{ showResult(fromLeet(input.value)); }catch(e){ showError(e) } }
+
+    document.getElementById('sha1').onclick = async ()=>{ try{ showResult('Calculando...'); const h = await digestHex('SHA-1', input.value); showResult(h); }catch(e){ showError(e) } }
+    document.getElementById('sha256').onclick = async ()=>{ try{ showResult('Calculando...'); const h = await digestHex('SHA-256', input.value); showResult(h); }catch(e){ showError(e) } }
+
+    document.getElementById('clearInput').onclick = ()=>{ input.value=''; output.value=''; };
+    document.getElementById('swap').onclick = ()=>{ [input.value, output.value] = [output.value, input.value]; };
+    copyBtn.onclick = async ()=>{ try{ await navigator.clipboard.writeText(output.value); copyBtn.textContent='Copiado ✓'; setTimeout(()=>copyBtn.textContent='Copiar resultado',1200); }catch(e){ copyBtn.textContent='Error'; setTimeout(()=>copyBtn.textContent='Copiar resultado',1200); } };
+
+    input.addEventListener('keydown', (e)=>{ if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='enter'){ document.getElementById('encodeBase64').click(); e.preventDefault(); } });
+  </script>
+</body>
+</html>
