@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AureComay's pages | login</title>
+<style>
+@keyframes rainbow_animation {
+    0%,100% {background-position: 0 0;}
+    50% {background-position: 100% 0;}
+}
+
+body {
+    background-image: url(Img/StarfieldSimulation.gif);
+background-color: #000000;
+background-size: cover;
+background-attachment: fixed;
+color: #ffffff;
+}
+
+h3 {
+font-family: sans-serif;
+background: linear-gradient(to right, #ff0000, #d0ff00 , #00ff00, #1bc1f3, #0011ff, #6200ff, #da0098, #ff0000);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+animation: rainbow_animation 5s ease-in-out infinite !important;
+background-size: 400% 100%;
+}
+
+#Loginbox {
+    text-align: center;
+    background: #7000cc2f;
+    backdrop-filter: blur(5px);
+    margin: auto;
+    width: 30%;
+    height: 20%;
+    margin-top: 16%;
+    margin-bottom: 15%;
+    padding: 3vh 15vw;
+    border: 2px solid #6200ff83;
+    border-radius: 10px;
+}
+
+#aurecomaypages {
+border-radius: 10px;    
+border: 1px solid #4c00ff;
+cursor: pointer;
+background: #4803c74b;
+color: #fff;
+padding: 10px 20px;
+}
+</style>
+    <link rel="icon" type="image/png" href="Aurecomay's page icons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="Aurecomay's page icons/favicon.svg" />
+    <link rel="shortcut icon" href="Aurecomay's page icons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Aurecomay's page icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="AureComay's page" />
+    <link rel="manifest" href="Aurecomay's page icons/site.webmanifest" />
+</head>
+<body>
+    <div id="Loginbox">
+<h3>Por favor, inicia la sesión</h3>
+<button id="aurecomaypages">Iniciar con Google</button>
+<h3>Email: <span id="userEmail"></span></h3>
+    </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getDatabase } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+    // Configuración de Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyKCSJI1cx8THyVTPrNPscbVMgffEkknk",
+      authDomain: "aurecomaypages.firebaseapp.com",
+      databaseURL: "https://aurecomaypages-default-rtdb.firebaseio.com/",
+      projectId: "aurecomaypages",
+      storageBucket: "aurecomaypages.firebasestorage.app",
+      messagingSenderId: "538178961737",
+      appId: "1:538178961737:web:00528dddf5c4091c09da98"
+    };
+
+    // Inicializa Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+    const provider = new GoogleAuthProvider();
+
+    // Elementos del DOM
+    const aurecomaypages = document.getElementById('aurecomaypages');
+    const userEmail = document.getElementById('userEmail');
+
+    // Login con Google
+    aurecomaypages.onclick = () => {
+      signInWithPopup(auth, provider)
+        .then(result => {
+          const user = result.user;
+          console.log("Sesión iniciada:", user.email);
+          userEmail.textContent = user.email;
+
+          // Redirige tras iniciar sesión
+          window.location.href = "index.html";
+        })
+        .catch(error => console.error(error));
+    };
+
+    // Detectar si ya hay sesión activa
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        console.log("Usuario activo:", user.email);
+        window.location.href = "index.html"; // Redirige si ya está logueado
+      }
+    });
+  </script>
+</body>
+</html>
