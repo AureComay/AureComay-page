@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Sugerencias</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    /* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Bytesized&family=Jacquard+12&family=Pixelify+Sans:wght@400..700&family=Tiny5&display=swap');
+/* CSS */
+
+body {
+    background-image: url(Img/StarfieldSimulation.gif);
+    background-color: #000000;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #ffffff;
+}
+
+h1 {
+    font-size: 50px;
+    font-family: 'Tiny5';
+    margin-top: 10px;
+    text-align: center;
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #CBF31B, #fca330, #ff5e49);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
+    background-size: 400% 100%;
+}
+
+h2 {
+    font-family: 'Bytesized', sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, #33337a, #336180 , #0c640c, #65790e, #7a5018, #66261d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
+    background-size: 400% 100%;
+}
+
+
+@keyframes rainbow_animation {
+0%,100% {background-position: 0 0;}
+50% {background-position: 100% 0;}
+}
+
+a:hover {
+    margin-top: 10px;
+    text-align: center;
+    background: linear-gradient(to right, #ff0000, #d0ff00 , #00ff00, #1bc1f3, #0011ff, #6200ff, #da0098, #ff0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
+    background-size: 400% 100%;
+}
+
+a {
+    color: #00ff00;
+}
+
+.Links {
+    text-align: center;
+    background: #7000cc67;
+    margin: auto;
+    width: 30%;
+    height: 20%;
+    margin-top: 16%;
+    margin-bottom: 15%;
+}
+
+footer {
+    text-align: center;
+    text-shadow: 0 0 10px #ffffff;
+}
+</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Enviar Sugerencia</h1>
+<h2><a href="Utilidades.html">¿Volver a utilidades?</a></h2>
+
+<div class="Links">
+    <h2>Enviar Sugerencia</h2>
+
+    <textarea id="sugBox" placeholder="Escribe tu sugerencia aquí..." 
+        style="width: 80%; height: 120px; background:#000000b6; color:#00ff00;
+               border: 2px solid #00ff00; margin-top:15px; font-family:'Pixelify Sans';backdrop-filter: blur(10px);" rows="5" cols="33" placeholder="Sugerencia...">
+    </textarea>
+    <br>
+
+    <button id="sendBtn" 
+        style="margin-top: 15px; padding: 10px 15px; background: #4b0082; 
+               color:#00ff00; border: 2px solid #008f00; cursor:pointer;
+               font-family:'Bytesized';">
+        Enviar
+    </button>
+
+    <div id="msg" 
+         style="margin-top:10px; font-family:'Tiny5'; color:#00ff00; text-shadow:0 0 6px #00ff00;">
+    </div>
+</div>
+
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDyKCSJI1cx8THyVTPrNPscbVMgffEkknk",
+        authDomain: "aurecomaypages.firebaseapp.com",
+        databaseURL: "https://aurecomaypages-default-rtdb.firebaseio.com/",
+        projectId: "aurecomaypages",
+        storageBucket: "aurecomaypages.firebasestorage.app",
+        messagingSenderId: "538178961737",
+        appId: "1:538178961737:web:00528dddf5c4091c09da98"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const sugBox = document.getElementById("sugBox");
+    const sendBtn = document.getElementById("sendBtn");
+    const msg = document.getElementById("msg");
+
+    sendBtn.onclick = async () => {
+        let text = sugBox.value.trim();
+
+        if (!text) {
+            msg.textContent = "No puedes enviar un mensaje vacío.";
+            return;
+        }
+
+        sendBtn.disabled = true;
+        sendBtn.textContent = "Enviando...";
+
+        try {
+            await db.ref("sugerencias").push({
+                mensaje: text,
+                fecha: new Date().toISOString()
+            });
+
+            msg.textContent = "¡Sugerencia enviada!";
+            sugBox.value = "";
+        } catch (error) {
+            console.error(error);
+            msg.textContent = "Error al enviar.";
+        }
+
+        sendBtn.disabled = false;
+        sendBtn.textContent = "Enviar";
+    };
+</script>
+
+</body>
+</html>
