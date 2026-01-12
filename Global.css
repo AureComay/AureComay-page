@@ -1,0 +1,99 @@
+/* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Bytesized&family=Jacquard+12&family=Pixelify+Sans:wght@400..700&family=Tiny5&display=swap');
+/* CSS */
+
+body {
+    background-image: url(Img/StarfieldSimulation.gif);
+    background-color: #000000;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 50px;
+    font-family: 'Tiny5';
+    margin-top: 10px;
+    text-align: center;
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #CBF31B, #fca330, #ff5e49);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
+    background-size: 400% 100%;
+}
+
+h2 {
+    font-family: 'Bytesized', sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, #33337a, #336180 , #0c640c, #65790e, #7a5018, #66261d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
+    background-size: 400% 100%;
+}
+
+
+@keyframes rainbow_animation {
+0%,100% {background-position: 0 0;}
+50% {background-position: 100% 0;}
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(2deg);
+    }
+    50% {
+        transform: rotate(-2deg);
+    }
+    100% {
+        transform: rotate(2deg);
+    }
+}
+
+a:hover {
+    margin-top: 10px;
+    text-align: center;
+    background: linear-gradient(to right, #ff0000, #d0ff00 , #00ff00, #1bc1f3, #0011ff, #6200ff, #da0098, #ff0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
+    background-size: 400% 100%;
+}
+
+a {
+    color: #00ff00;
+}
+
+.NavBox {
+    text-align: center;
+    background: #2f104a61;
+    margin: auto;
+    width: 30%;
+    height: 20%;
+    margin-top: 16%;
+    margin-bottom: 15%;
+    backdrop-filter: blur(5.6px);
+    -webkit-backdrop-filter: blur(5.6px);
+    border: 2px solid #6b1dd9;
+    box-shadow: 0 0 15px #6b1dd9;
+    animation: rotate 15s ease-in-out infinite !important;
+
+}
+
+footer {
+    text-align: center;
+    text-shadow: 0 0 10px #ffffff;
+    margin-bottom: 20px;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background:#000; }
+::-webkit-scrollbar-thumb {
+    border-radius:12px;
+    background:#170000;
+}
