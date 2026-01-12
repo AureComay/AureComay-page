@@ -8,6 +8,8 @@ body {
     background-size: cover;
     background-attachment: fixed;
     color: #ffffff;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
@@ -40,6 +42,18 @@ h2 {
 50% {background-position: 100% 0;}
 }
 
+@keyframes rotate {
+    0% {
+        transform: rotate(2deg);
+    }
+    50% {
+        transform: rotate(-2deg);
+    }
+    100% {
+        transform: rotate(2deg);
+    }
+}
+
 a:hover {
     margin-top: 10px;
     text-align: center;
@@ -55,10 +69,11 @@ a {
     color: #00ff00;
 }
 
-.TermsBox {
+.NavBox {
     text-align: center;
+    background: #2f104a61;
     margin: auto;
-    width: 80%;
+    width: 30%;
     height: 20%;
     margin-top: 16%;
     margin-bottom: 15%;
@@ -66,11 +81,19 @@ a {
     -webkit-backdrop-filter: blur(5.6px);
     border: 2px solid #6b1dd9;
     box-shadow: 0 0 15px #6b1dd9;
-    background: #2f104a61;
-    padding: 10px;
+    animation: rotate 15s ease-in-out infinite !important;
+
 }
 
 footer {
     text-align: center;
     text-shadow: 0 0 10px #ffffff;
+    margin-bottom: 20px;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background:#000; }
+::-webkit-scrollbar-thumb {
+    border-radius:12px;
+    background:#170000;
 }
