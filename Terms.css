@@ -55,14 +55,19 @@ a {
     color: #00ff00;
 }
 
-.Links {
+.TermsBox {
     text-align: center;
-    background: #7000cc67;
     margin: auto;
     width: 80%;
     height: 20%;
     margin-top: 16%;
     margin-bottom: 15%;
+    backdrop-filter: blur(5.6px);
+    -webkit-backdrop-filter: blur(5.6px);
+    border: 2px solid #6b1dd9;
+    box-shadow: 0 0 15px #6b1dd9;
+    background: #2f104a61;
+    padding: 10px;
 }
 
 footer {
