@@ -1,68 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AureComay's page.</title>
+    <link rel="stylesheet" href="Global.css">
     <style>
-/* Imports */
-@import url('https://fonts.googleapis.com/css2?family=Bytesized&family=Jacquard+12&family=Pixelify+Sans:wght@400..700&family=Tiny5&display=swap');
 /* CSS */
-
-body {
-    background-image: url(Img/StarfieldSimulation.gif);
-    background-color: #000000;
-    background-size: cover;
-    background-attachment: fixed;
-    color: #ffffff;
-}
-
-h1 {
-    font-size: 50px;
-    font-family: 'Tiny5';
-    margin-top: 10px;
-    text-align: center;
-    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #CBF31B, #fca330, #ff5e49);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: rainbow_animation 5s ease-in-out infinite !important;
-    background-size: 400% 100%;
-}
-
-h2 {
-    font-family: 'Bytesized', sans-serif;
-    text-align: center;
-    background: linear-gradient(to right, #0000ff, #0099ff , #00ff00, #d0ff00, #ff9100, #ff1e00);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: rainbow_animation 5s ease-in-out infinite !important;
-    background-size: 400% 100%;
-}
-
-
-@keyframes rainbow_animation {
-0%,100% {background-position: 0 0;}
-50% {background-position: 100% 0;}
-}
-
-a:hover {
-    margin-top: 10px;
-    text-align: center;
-    background: linear-gradient(to right, #ff0000, #d0ff00 , #00ff00, #1bc1f3, #0011ff, #6200ff, #da0098, #ff0000);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: rainbow_animation 5s ease-in-out infinite !important;
-    background-size: 400% 100%;
-}
-
-a {
-    color: #00ff00;
-}
-
-.Links {
-    text-align: center;
-    background: #7000cc67;
+.NavBox {
     margin: auto;
     width: 30%;
     height: 20%;
@@ -72,7 +17,8 @@ a {
 
 footer {
     text-align: center;
-    text-shadow: 0 0 10px #ffffff;
+    text-shadow: 0 0 10px #00ff2a;
+    margin-bottom: 20px;
 }
 
 .button01 {
@@ -97,11 +43,11 @@ footer {
 <body>
     <h1>AureComay's page :D</h1>
     <h2>Error 404 - pagina no encontrada</h2>
-    <div class="Links">
+    <div class="NavBox">
     Error404 - pagina no encontrada!
-    <p>Comprueba que el enlaze este bien escrito.</p>
-    <a href="https://aurecomay.github.io/AureComay-page/"><input type="button" value="Esta bien." class="button01"></a>
+    <p>Comprueba que el enlace este bien escrito.</p>
+    <a href="index.html"><input type="button" value="Esta bien." class="button01"></a>
     </div>
-    <footer>No se, quieres ver mi wiki?</footer>
+    <footer class="Footer"></footer>
 </body>
 </html>
