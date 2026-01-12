@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AureComay's page.</title>
-    <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
 /* Imports */
 @import url('https://fonts.googleapis.com/css2?family=Bytesized&family=Jacquard+12&family=Pixelify+Sans:wght@400..700&family=Tiny5&display=swap');
@@ -15,6 +14,8 @@ body {
     background-size: cover;
     background-attachment: fixed;
     color: #ffffff;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
@@ -47,6 +48,18 @@ h2 {
 50% {background-position: 100% 0;}
 }
 
+@keyframes rotate {
+    0% {
+        transform: rotate(2deg);
+    }
+    50% {
+        transform: rotate(-2deg);
+    }
+    100% {
+        transform: rotate(2deg);
+    }
+}
+
 a:hover {
     margin-top: 10px;
     text-align: center;
@@ -62,22 +75,39 @@ a {
     color: #00ff00;
 }
 
-.Links {
+.NavBox {
     text-align: center;
-    background: #7000cc67;
+    background: #2f104a61;
     margin: auto;
     width: 30%;
     height: 20%;
     margin-top: 16%;
     margin-bottom: 15%;
+    backdrop-filter: blur(5.6px);
+    -webkit-backdrop-filter: blur(5.6px);
+    border: 2px solid #6b1dd9;
+    box-shadow: 0 0 15px #6b1dd9;
+    animation: rotate 5s ease-in-out infinite !important;
+    border-radius: 2px;
+    font-family: sans-serif;
 }
 
 footer {
     text-align: center;
     text-shadow: 0 0 10px #ffffff;
-    font-size: 0.8rem;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background:#000; }
+::-webkit-scrollbar-thumb {
+    border-radius:12px;
+    background:#170000;
 }
     </style>
+
+    <title>AureComay's page.</title>
     <link rel="icon" type="image/png" href="Aurecomay's page icons/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="Aurecomay's page icons/favicon.svg" />
     <link rel="shortcut icon" href="Aurecomay's page icons/favicon.ico" />
@@ -87,16 +117,23 @@ footer {
 </head>
 <body>
     <h1>AureComay's page :D</h1>
-    <h2>TEH EPIK DUCK IS COMING!!!!!</h2>
-    <div class="Links">
+    <h2 class="Duck" onclick="Sound()">TEH EPIK "DUCK" IS COMING!!!!!</h2>
+    <div class="NavBox">
         <br>
-        <a href="Projectos.html">Mis Projectos</a><br>
-        <a href="SobreMi.html">Sobre mi</a><br>
-        <a href="Utilidades.html">Utilidades</a>
+        <a href="Projectos.html">Mis Projectos</a><br><br>
+        <a href="SobreMi.html">Sobre mi</a><br><br>
+        <a href="Utilidades.html">Utilidades</a><br><br>
+        <a href="Changelog.html">Changelog</a>
         <br><br>
     </div>
-    <footer><a href="Terminos-y-condiciones.html">AureComay's page | Ningun derecho reservado 2025-2025</a></footer>
+    <footer><a href="Terminos-y-condiciones.html">AureComay's page | Ningun derecho reservado 2025-2026</a><footer>
+        <script>const Duck = new Audio('snd/Duck.mp3');
+
+function Sound() {
+
+    Duck.currentTime = 0; 
+    
+    Duck.play();
+}</script>
 </body>
 </html>
-
-
