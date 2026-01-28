@@ -24,3 +24,13 @@
 
 ## Dentro de firebase
 ### Si teoricamente te doy acceso a firebase aqui tendras una guia.
+----
+No hay mucho que ver aqui pero
+## realtime database
+
+### Sugerencias
+* Las sugerencias de los usuarios son enviadas aqui.
+* No hay nada mas que decir.
+----
+# FIN.
+
