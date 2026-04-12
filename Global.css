@@ -2,40 +2,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Bytesized&family=Jacquard+12&family=Pixelify+Sans:wght@400..700&family=Tiny5&display=swap');
 /* CSS */
 
+* {
+    box-sizing: content-box;
+}
+
 body {
-    background-image: url(Img/StarfieldSimulation.gif);
-    background-color: #000000;
-    background-size: cover;
+    background-image: url(Img/FondoAurePages.gif);
     background-attachment: fixed;
+    background-size: cover;
     color: #ffffff;
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
 }
-
+/* 'Tiny5' */
 h1 {
     font-size: 50px;
-    font-family: 'Tiny5';
+    font-family: 'Tiny5', sans-serif;
     margin-top: 10px;
     text-align: center;
-    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #CBF31B, #fca330, #ff5e49);
+    background: linear-gradient(to right, #6666ff, #8400ff , #ea00ff, #f31bda, #30fc59, #ff9849);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: rainbow_animation 5s ease-in-out infinite !important;
+    animation: rainbow_animation 30s ease-in-out infinite !important;
     background-size: 400% 100%;
 }
-
+/* 'Bytesized' */
 h2 {
     font-family: 'Bytesized', sans-serif;
     text-align: center;
-    background: linear-gradient(to right, #33337a, #336180 , #0c640c, #65790e, #7a5018, #66261d);
+    background: linear-gradient(to right, #b05490, #783380, #26093e);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: rainbow_animation 5s ease-in-out infinite !important;
+    animation: rainbow_animation 10s ease-in-out infinite !important;
     background-size: 400% 100%;
 }
 
+
+@keyframes NAVBOX_ANIM {
+0%,100% {box-shadow: 0 0 25px #c61dd9; border: 2px solid #7e1dd9; background: #30164361;backdrop-filter: blur(6px);-webkit-backdrop-filter: blur(6px);transform: rotate(2deg);border-radius: 16px;}
+50% {box-shadow: 0 0 1px #580e60; border: 2px solid #441175; background: #21102d61;backdrop-filter: blur(2px);
+-webkit-backdrop-filter: blur(2px);transform: rotate(-2deg);border-radius: 4px;}
+}
 
 @keyframes rainbow_animation {
 0%,100% {background-position: 0 0;}
@@ -57,43 +67,44 @@ h2 {
 a:hover {
     margin-top: 10px;
     text-align: center;
-    background: linear-gradient(to right, #ff0000, #d0ff00 , #00ff00, #1bc1f3, #0011ff, #6200ff, #da0098, #ff0000);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: rainbow_animation 5s ease-in-out infinite !important;
+    color: #ff92ed;
     background-size: 400% 100%;
 }
 
 a {
-    color: #00ff00;
+    color: #f700ce;
+    text-decoration: none;
 }
 
 .NavBox {
+    min-width: 200px;
+    min-height: 100px;
+    border-radius: 8px;
     text-align: center;
-    background: #2f104a61;
+    background: #30164361;
     margin: auto;
     width: 30%;
     height: 20%;
     margin-top: 16%;
     margin-bottom: 15%;
-    backdrop-filter: blur(5.6px);
-    -webkit-backdrop-filter: blur(5.6px);
-    border: 2px solid #6b1dd9;
-    box-shadow: 0 0 15px #6b1dd9;
-    animation: rotate 15s ease-in-out infinite !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 2px solid #7e1dd9;
+    box-shadow: 0 0 15px #c61dd9;
+    animation: NAVBOX_ANIM 4s ease-in-out infinite !important;
+    padding: 20px;
 
 }
 
 footer {
     text-align: center;
-    text-shadow: 0 0 10px #ffffff;
+    text-shadow: 0 0 10px #fefffe28;
     margin-bottom: 20px;
 }
 
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background:#000; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background:#291538; }
 ::-webkit-scrollbar-thumb {
-    border-radius:12px;
-    background:#170000;
+    border-radius: 0px;
+    background:#9009ff;
 }
