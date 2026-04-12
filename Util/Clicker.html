@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="esp">
+<head>
+    <style>
+
+.NavBox {
+    min-width: 200px;
+}
+
+.boton {
+    background: linear-gradient(to right, #530057, #1b003d);
+    color: #ff00cc;
+    width: 7rem;
+    height: 2rem;
+    border: 2px solid #6200ff;
+    box-shadow: 0 0 10px #6200ff;
+    margin: 10px;
+}
+
+.boton:hover {
+    background: linear-gradient(to right, #530057, #5900c5);
+    color: #ff00cc;
+    text-shadow: 0 0 5px #ff00cc;
+    width: 7rem;
+    height: 2rem;
+    border: 2px solid #8f4aff;
+    box-shadow: 0 0 10px #8f4aff;
+    margin: 10px;
+}
+
+.divisor-line {
+    width: 100%;
+    border: transparent;
+    background: linear-gradient(to right, transparent, #6b1dd9, transparent);
+    margin: auto;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    padding: 1.2px;
+}
+
+@keyframes h3bright {
+0%,100% {text-shadow: 0 0 10px #6200ff}
+50% {text-shadow: 0 0 2px #6200ff}
+}
+
+h3 {
+    animation: h3bright 5s ease-in-out infinite;
+    color: #6200ff;
+}
+
+#Chetos {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.BotonGrande {
+    font-size: 1.3rem;
+    background: linear-gradient(to right, #530057, #1b003d);
+    color: #ff00cc;
+    width: 10rem;
+    height: 4rem;
+    border: 2px solid #6200ff;
+    box-shadow: 0 0 10px #6200ff;
+    margin: 10px;
+}
+
+.BotonGrande:hover {
+    background: linear-gradient(to right, #530057, #5900c5);
+    color: #ff00cc;
+    width: 10rem;
+    height: 4rem;
+    text-shadow: 0 0 5px #ff00cc;
+    border: 2px solid #8f4aff;
+    box-shadow: 0 0 10px #8f4aff;
+    margin: 10px;
+}
+    </style>
+    <link rel="stylesheet" href="../Global.css">
+    <link rel="icon" type="image/png" href="../Aurecomay's page icons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../Aurecomay's page icons/favicon.svg" />
+    <link rel="shortcut icon" href="../Aurecomay's page icons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../Aurecomay's page icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="AureComay's page" />
+    <link rel="manifest" href="../Aurecomay's page icons/site.webmanifest" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker de temu</title>
+</head>
+<body>
+    <h1>Clicker de temu</h1>
+    <h2><a href="../Utilidades.html"><button class="BotonGrande">Volver a utilidades</button></a></h2>
+    <div class="NavBox">
+    <span id="Contador">0</span>
+    <br>
+    <img src="../IMPORTANTE/Chetos.webp" alt="elemento cliqueable." onclick="Click()" id="Chetos">
+    <div class="divisor-line"></div>
+    <br>
+    <h3>Tienda de webadas de aure!!11!1!!</h2>
+    <button id="superc" class="boton" onclick="BotonSnd(); SuperComprar(); BotonSnd()"> Comprar super click</button>
+    <br>
+    <button id="autoc" class="boton" onclick="BotonSnd(); AutoComprar(); BotonSnd()"> Comprar AutoClick</button>
+    <div class="divisor-line"></div>
+    <button class="boton" onclick="BotonSnd(); About(); BotonSnd(); ">sobre esta webada</button><br>
+    </div>
+<script>
+// Mente maestra que creo esta webada: AURE EL IMB-
+
+// Variables
+let Clicks = 0;
+let superclick = 0;
+let AutoC = 0;
+const TimerID = document.getElementById('Timer')
+const ContID = document.getElementById('Contador');
+const superc = document.getElementById('superc');
+const autoc = document.getElementById('autoc');
+const ButtSnd = new Audio('../Snd/XP.mp3');
+const ButtDir = document.getElementsByClassName('boton');
+
+// Funciones
+
+function BotonSnd() {
+
+    ButtSnd.currentTime = 0; 
+    
+    ButtSnd.play();
+}
+
+// funcion click basica, funciona y no se por qu-
+function Click() { 
+if (superclick > 1) { 
+
+Clicks += superclick
+}
+else {
+Clicks += 1
+}
+};
+
+function SuperComprar() {
+
+if (Clicks > 14) {
+
+Clicks -= 15
+superclick += 2
+}
+else {
+
+alert('No tienes suficientes clicks wn')
+
+}
+
+};
+
+function AutoComprar() {
+
+if (Clicks > 49) {
+
+Clicks -= 50
+AutoC += 1
+
+}
+else {
+
+alert('No tienes suficientes clicks wn')
+
+}
+
+};
+
+function About() {
+
+alert('Si tiene algun bug esta cochinada, pos te pido amablemente que te vayas a la mierd- por que no lo souluciono hasta la 4.1 de aure pages')
+alert(':v')
+};
+
+
+// Actualizadores
+// si se, esta wea seguro es ineficiente.
+setInterval(() => {
+    ContID.textContent = `${Clicks}`;
+}, 1);
+
+setInterval(() => {
+    if (AutoC > 0) {
+    Clicks += AutoC
+    }
+else {
+    console.log('cucumber')
+}
+}, 1);
+</script>
+</body>
+</html>
