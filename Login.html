@@ -1,23 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<link rel="stylesheet" href="Global.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AureComay's pages | login</title>
 <style>
-@keyframes rainbow_animation {
-    0%,100% {background-position: 0 0;}
-    50% {background-position: 100% 0;}
-}
-
-body {
-    background-image: url(Img/StarfieldSimulation.gif);
-background-color: #000000;
-background-size: cover;
-background-attachment: fixed;
-color: #ffffff;
-}
-
 h3 {
 font-family: sans-serif;
 background: linear-gradient(to right, #ff0000, #d0ff00 , #00ff00, #1bc1f3, #0011ff, #6200ff, #da0098, #ff0000);
@@ -28,18 +16,13 @@ animation: rainbow_animation 5s ease-in-out infinite !important;
 background-size: 400% 100%;
 }
 
-#Loginbox {
-    text-align: center;
-    background: #7000cc2f;
-    backdrop-filter: blur(5px);
+.Navbox {
     margin: auto;
-    width: 30%;
-    height: 20%;
+    width: 60%;
+    height: 40%;
     margin-top: 16%;
     margin-bottom: 15%;
     padding: 3vh 15vw;
-    border: 2px solid #6200ff83;
-    border-radius: 10px;
 }
 
 #aurecomaypages {
@@ -59,7 +42,7 @@ padding: 10px 20px;
     <link rel="manifest" href="Aurecomay's page icons/site.webmanifest" />
 </head>
 <body>
-    <div id="Loginbox">
+    <div class="NavBox">
 <h3>Por favor, inicia la sesión</h3>
 <button id="aurecomaypages">Iniciar con Google</button>
 <h3>Email: <span id="userEmail"></span></h3>
