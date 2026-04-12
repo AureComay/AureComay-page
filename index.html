@@ -2,111 +2,30 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href="Global.css">
     <style>
-/* Imports */
-@import url('https://fonts.googleapis.com/css2?family=Bytesized&family=Jacquard+12&family=Pixelify+Sans:wght@400..700&family=Tiny5&display=swap');
-/* CSS */
-
-body {
-    background-image: url(Img/StarfieldSimulation.gif);
-    background-color: #000000;
-    background-size: cover;
-    background-attachment: fixed;
-    color: #ffffff;
+* {
     margin: 0;
     padding: 0;
 }
-
-h1 {
-    font-size: 50px;
-    font-family: 'Tiny5';
-    margin-top: 10px;
-    text-align: center;
-    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #CBF31B, #fca330, #ff5e49);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: rainbow_animation 5s ease-in-out infinite !important;
-    background-size: 400% 100%;
+@keyframes Fade-OutPurple {
+0% {opacity: 100%; z-index: 9999; background-color: #490080;}
+99% {opacity: 0%; z-index: 9999; background: transparent;}
 }
 
-h2 {
-    font-family: 'Bytesized', sans-serif;
-    text-align: center;
-    background: linear-gradient(to right, #33337a, #336180 , #0c640c, #65790e, #7a5018, #66261d);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: rainbow_animation 5s ease-in-out infinite !important;
-    background-size: 400% 100%;
-}
-
-
-@keyframes rainbow_animation {
-0%,100% {background-position: 0 0;}
-50% {background-position: 100% 0;}
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotate(2deg);
-    }
-    50% {
-        transform: rotate(-2deg);
-    }
-    100% {
-        transform: rotate(2deg);
-    }
-}
-
-a:hover {
-    margin-top: 10px;
-    text-align: center;
-    background: linear-gradient(to right, #ff0000, #d0ff00 , #00ff00, #1bc1f3, #0011ff, #6200ff, #da0098, #ff0000);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: rainbow_animation 5s ease-in-out infinite !important;
-    background-size: 400% 100%;
-}
-
-a {
-    color: #00ff00;
-}
-
-.NavBox {
-    text-align: center;
-    background: #2f104a61;
-    margin: auto;
-    width: 30%;
-    height: 20%;
-    margin-top: 16%;
-    margin-bottom: 15%;
-    backdrop-filter: blur(5.6px);
-    -webkit-backdrop-filter: blur(5.6px);
-    border: 2px solid #6b1dd9;
-    box-shadow: 0 0 15px #6b1dd9;
-    animation: rotate 5s ease-in-out infinite !important;
-    border-radius: 2px;
-    font-family: sans-serif;
-}
-
-footer {
-    text-align: center;
-    text-shadow: 0 0 10px #ffffff;
-    margin-bottom: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background:#000; }
-::-webkit-scrollbar-thumb {
-    border-radius:12px;
-    background:#170000;
+#PurpleOverlay {
+    z-index: -99999;
+    background-color: transparent;
+    width: 200000vw;
+    height: 200000vh;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    animation: Fade-OutPurple 2s ease-in-out forwards;
 }
     </style>
-
+    <style id="scrollglitch"></style>
     <title>AureComay's page.</title>
     <link rel="icon" type="image/png" href="Aurecomay's page icons/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="Aurecomay's page icons/favicon.svg" />
@@ -116,24 +35,50 @@ footer {
     <link rel="manifest" href="Aurecomay's page icons/site.webmanifest" />
 </head>
 <body>
+    <div id="PurpleOverlay">
+    </div>
+    <audio id="bm" src="Snd/Chanfle.mp3" autoplay loop preload="metadata"></audio>
     <h1>AureComay's page :D</h1>
-    <h2 class="Duck" onclick="Sound()">TEH EPIK "DUCK" IS COMING!!!!!</h2>
+    <h2><span id="text1"></span><span Id="Duck1" onclick="Sound()" onclick="">Duk</span><span id="text2"></span></h2>
     <div class="NavBox">
-        <br>
         <a href="Projectos.html">Mis Projectos</a><br><br>
         <a href="SobreMi.html">Sobre mi</a><br><br>
         <a href="Utilidades.html">Utilidades</a><br><br>
         <a href="Changelog.html">Changelog</a>
-        <br><br>
+        <a href="Creditos.html"></a>
     </div>
     <footer><a href="Terminos-y-condiciones.html">AureComay's page | Ningun derecho reservado 2025-2026</a><footer>
-        <script>const Duck = new Audio('Snd/Duck.mp3');
-
+    
+    <script>
+const Duck = new Audio('Snd/Duck.mp3');
+const DukTex = document.GetbyElementId('Duck1');
+const dukc = document.getElementById('dukclick');
 function Sound() {
 
     Duck.currentTime = 0; 
-    
     Duck.play();
-}</script>
+}
+    </script>
+    <script>
+// Hay musica mejor asi que luego veo que usar asi que inabilitare la musica de aqui
+document.getElementById('bm').volume = 0;
+    </script>
+    <script src="ScrollbarAnim.js">// revisa el script antes de integrarlo, ahi estan escritas las dependencias.</script>
+    <script> // esto es el coso que selecciona el texto aleatorio del H2 del Duk
+
+// aqui defino las variables
+const Duk1 = ["epik ", "teh ", "teh epik "];
+const Duk2 = [" is a lie", "!1!!111!", " is coming!!1111!!", " is over", " is ded", " is here", " is epik"];
+const dukt1 = document.getElementById("text1");
+const dukt2 = document.getElementById("text2");
+const DukS1 = Duk1[Math.floor(Math.random() * Duk1.length)];
+const DukS2 = Duk2[Math.floor(Math.random() * Duk2.length)]
+// A partir de aqui esta el selector
+
+dukt1.textContent = `${DukS1}`
+
+dukt2.textContent = `${DukS2}`
+
+    </script>
 </body>
 </html>
