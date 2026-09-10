@@ -1,3 +1,14 @@
+# AURE PAGES :D
+
+## Pos es una pagina
+<h2>mui epika</h2>
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=github,js,html,css,cloudflare" />
+  </a>
+</p>
+-Lenguajes y aplicaciones usadas en acp.
+
 # Guia general para trabajar aqui.
 
 --------------------------------------------------
