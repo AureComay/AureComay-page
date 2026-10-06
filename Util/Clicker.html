@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="esp">
+<html lang="es">
 <head>
     <style>
 
@@ -10,7 +10,7 @@
 .boton {
     background: linear-gradient(to right, #530057, #1b003d);
     color: #ff00cc;
-    width: 7rem;
+    width: 10rem;
     height: 2rem;
     border: 2px solid #6200ff;
     box-shadow: 0 0 10px #6200ff;
@@ -21,7 +21,7 @@
     background: linear-gradient(to right, #530057, #5900c5);
     color: #ff00cc;
     text-shadow: 0 0 5px #ff00cc;
-    width: 7rem;
+    width: 10rem;
     height: 2rem;
     border: 2px solid #8f4aff;
     box-shadow: 0 0 10px #8f4aff;
@@ -92,23 +92,30 @@ h3 {
     <div class="NavBox">
     <span id="Contador">0</span>
     <br>
-    <img src="../IMPORTANTE/Chetos.webp" alt="elemento cliqueable." onclick="Click()" id="Chetos">
+    <img src="../IMPORTANTE/Chetos-newbie.webp" alt="elemento cliqueable, Chetos" onclick="Click()" id="Chetos">
     <div class="divisor-line"></div>
     <br>
-    <h3>Tienda de webadas de aure!!11!1!!</h2>
-    <button id="superc" class="boton" onclick="BotonSnd(); SuperComprar(); BotonSnd()"> Comprar super click</button>
-    <br>
-    <button id="autoc" class="boton" onclick="BotonSnd(); AutoComprar(); BotonSnd()"> Comprar AutoClick</button>
+    <h3>Tienda de webadas de aure!!11!1!!</h3>
+    <button id="superc" class="boton" onclick="BotonSnd(); SuperComprar(); BotonSnd()"> Comprar super click (15)
+        <br><h4 class="Desc">Ganas +1 por click</h4>
+    </button>
+        
+    <button id="autoc" class="boton" onclick="BotonSnd(); AutoComprar(); BotonSnd()"> Comprar AutoClick (50)
+        <br><h4 class="Desc">Ganas +1 por segundo</h4>
+    </button>
     <div class="divisor-line"></div>
     <button class="boton" onclick="BotonSnd(); About(); BotonSnd(); ">sobre esta webada</button><br>
     </div>
 <script>
 // Mente maestra que creo esta webada: AURE EL IMB-
+// Se supone que hice un fork para arreglar y mejorar esta vara, pero no entiendo el código, pero pues, persona que hizo la mejora: Yalmil
 
 // Variables
+let url = window.location.href;
 let Clicks = 0;
 let superclick = 0;
 let AutoC = 0;
+let compC = 0;  
 const TimerID = document.getElementById('Timer')
 const ContID = document.getElementById('Contador');
 const superc = document.getElementById('superc');
@@ -116,7 +123,24 @@ const autoc = document.getElementById('autoc');
 const ButtSnd = new Audio('../Snd/XP.mp3');
 const ButtDir = document.getElementsByClassName('boton');
 
-// Funciones
+// Verificar URL
+
+if (url.includes("https://aure.pages.dev")) {
+    console.log("URL CORRECTA");
+}
+else if (url.includes("https://aurecomay.github.io")) {
+    redirect("https://aure.pages.dev/Util/Clicker.html");
+}
+else if (url.includes("http://127.0.0.1")) {
+    console.log("Activado en modo desarrollo")
+    document.write("<h5>version: DBUILD")
+
+}
+else {
+    document.write("<h1>Ocurrio un error, intenta de nuevo, si el error persiste, reportalo a: https://aure.pages.dev/bug-report</h1>");
+}
+
+// Función Sonido
 
 function BotonSnd() {
 
@@ -125,7 +149,17 @@ function BotonSnd() {
     ButtSnd.play();
 }
 
-// funcion click basica, funciona y no se por qu-
+
+// GD
+
+function Geometrydash() {
+    console.log("URL: " + url); 
+}
+
+Geometrydash();
+
+// Click función.
+
 function Click() { 
 if (superclick > 1) { 
 
@@ -136,12 +170,15 @@ Clicks += 1
 }
 };
 
+// SuperClick
+
 function SuperComprar() {
 
 if (Clicks >= 15) {
 
 Clicks -= 15
 superclick += 2
+compC += 1
 }
 else {
 
@@ -151,13 +188,15 @@ alert('No tienes suficientes clicks wn')
 
 };
 
+// AutoClick
+
 function AutoComprar() {
 
 if (Clicks >= 50) {
 
 Clicks -= 50
 AutoC += 1
-
+compC += 1
 }
 else {
 
@@ -169,8 +208,7 @@ alert('No tienes suficientes clicks wn')
 
 function About() {
 
-alert('Si tiene algun bug esta cochinada, pos te pido amablemente que te vayas a la mierd- por que no lo souluciono hasta la 4.1 de aure pages')
-alert(':v')
+alert('Holipi (más femboy eso), soy Yalmil, yo si soy buena persona, así que reporta bugs aquí: https://aure.pages.dev/bug-report. Lo leeré habitualmente, así que se arregleran pronto :D')
 };
 
 
@@ -179,14 +217,12 @@ alert(':v')
 setInterval(() => {
     ContID.textContent = `${Clicks}`;
 }, 1);
+    
 
 setInterval(() => {
     if (AutoC > 0) {
     Clicks += AutoC
     }
-else {
-    console.log('cucumber')
-}
 }, 1);
 </script>
 </body>
