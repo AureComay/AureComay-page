@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Encriptador - Aure Pages</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../Global.css">
+<style>
+  /* Estilos específicos de esta sección */
+  .crypt-container {
+    width: 90%;
+    max-width: 500px;
+    margin: 5% auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .crypt-textarea {
+    width: 100%;
+    height: 100px;
+    background: #000000b6;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    margin-top: 10px;
+    font-family: 'Pixelify Sans', monospace;
+    backdrop-filter: blur(10px);
+    resize: vertical;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+
+  .crypt-btn-group {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .crypt-btn {
+    padding: 10px 15px;
+    background: #4b0082;
+    color: #00ff00;
+    border: 2px solid #008f00;
+    cursor: pointer;
+    font-family: 'Bytesized', sans-serif;
+    transition: 0.2s;
+  }
+
+  .crypt-btn:hover {
+    background: #6a0ded;
+    box-shadow: 0 0 8px #00ff00;
+  }
+</style>
+</head>
+<body>
+
+<h2><a href="Utilidades.html">← Volver a utilidades</a></h2>
+
+<div class="NavBox crypt-container">
+    <h2>Encriptador Secreto</h2>
+
+    <textarea id="inputText" class="crypt-textarea" placeholder="Escribe tu mensaje o pégalo para desencriptar..."></textarea>
+    
+    <div class="crypt-btn-group">
+        <button onclick="encriptar()" class="crypt-btn">🔒 Encriptar</button>
+        <button onclick="desencriptar()" class="crypt-btn">🔓 Desencriptar</button>
+    </div>
+
+    <textarea id="outputText" class="crypt-textarea" readonly placeholder="Resultado..."></textarea>
+    
+    <button onclick="copiar()" class="crypt-btn" style="margin-top:10px;">📋 Copiar Resultado</button>
+</div>
+
+<script>
+    // Usa un cifrado Base64 invertido + sustitución para que se vea súper cryptico
+    function encriptar() {
+        let texto = document.getElementById("inputText").value;
+        if (!texto) return;
+
+        // Convertimos a UTF-8 Base64 seguro para soportar emojis y tildes
+        let encoded = btoa(unescape(encodeURIComponent(texto)));
+        
+        // Invertimos la cadena y le agregamos un toque retro
+        let invertido = encoded.split("").reverse().join("");
+        document.getElementById("outputText").value = "AURE-" + invertido;
+    }
+
+    function desencriptar() {
+        let texto = document.getElementById("inputText").value.trim();
+        if (!texto) return;
+
+        try {
+            // Quitamos el prefijo si lo tiene
+            if (texto.startsWith("AURE://")) {
+                texto = texto.replace("AURE-", "");
+            }
+
+            // Volvemos a invertir la cadena
+            let revertido = texto.split("").reverse().join("");
+            
+            // Decodificamos el Base64
+            let decoded = decodeURIComponent(escape(atob(revertido)));
+            document.getElementById("outputText").value = decoded;
+        } catch (e) {
+            document.getElementById("outputText").value = "❌ ERROR: Código inválido o corrupto.";
+        }
+    }
+
+    function copiar() {
+        let out = document.getElementById("outputText");
+        if (!out.value) return;
+        out.select();
+        navigator.clipboard.writeText(out.value);
+        alert("¡Resultado copiado al portapapeles!");
+    }
+</script>
+
+</body>
+</html>

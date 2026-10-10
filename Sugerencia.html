@@ -2,47 +2,79 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Sugerencias</title>
+<title>Sugerencias - Aure Pages</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="Global.css">
+    <link rel="icon" type="image/png" href="Aurecomay's page icons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="Aurecomay's page icons/favicon.svg" />
+    <link rel="shortcut icon" href="Aurecomay's page icons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Aurecomay's page icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="AureComay's page" />
+    <link rel="manifest" href="Aurecomay's page icons/site.webmanifest" />
 <style>
-.NavBox {
-    width: 30%;
-    height: 20%;
-    margin-top: 16%;
-    margin-bottom: 15%;
-}
+  .sugerencias-container {
+    width: 90%;
+    max-width: 450px;
+    margin: 5% auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .sugerencias-textarea {
+    width: 100%;
+    height: 120px;
+    background: #000000b6;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    margin-top: 15px;
+    font-family: 'Pixelify Sans', sans-serif;
+    backdrop-filter: blur(10px);
+    resize: vertical;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+
+  .sugerencias-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #4b0082;
+    color: #00ff00;
+    border: 2px solid #008f00;
+    cursor: pointer;
+    font-family: 'Bytesized', sans-serif;
+    transition: 0.2s;
+  }
+
+  .sugerencias-btn:hover {
+    background: #6a0ded;
+    box-shadow: 0 0 8px #00ff00;
+  }
+
+  .sugerencias-msg {
+    margin-top: 15px;
+    font-family: 'Tiny5', sans-serif;
+    color: #00ff00;
+    text-shadow: 0 0 6px #00ff00;
+    min-height: 20px;
+  }
 </style>
-<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<h1>Sugerencias.</h1>
+<h2><a href="Utilidades.html">← Volver a utilidades</a></h2>
 
-<h1>Enviar Sugerencia</h1>
-<h2><a href="Utilidades.html">¿Volver a utilidades?</a></h2>
-
-<div class="NavBox">
+<div class="NavBox sugerencias-container">
     <h2>Enviar Sugerencia</h2>
 
-    <textarea id="sugBox" placeholder="Escribe tu sugerencia aquí..." 
-        style="width: 80%; height: 120px; background:#000000b6; color:#00ff00;
-               border: 2px solid #00ff00; margin-top:15px; font-family:'Pixelify Sans';backdrop-filter: blur(10px);resize: vertical;" rows="5" cols="33" placeholder="Sugerencia...;">
-    </textarea>
+    <textarea id="sugBox" class="sugerencias-textarea" placeholder="Escribe tu sugerencia aquí..." maxlength="300"></textarea>
     <br>
 
-    <button id="sendBtn" 
-        style="margin-top: 15px; padding: 10px 15px; background: #4b0082; 
-               color:#00ff00; border: 2px solid #008f00; cursor:pointer;
-               font-family:'Bytesized';">
-        Enviar
-    </button>
+    <button id="sendBtn" class="sugerencias-btn">Enviar</button>
 
-    <div id="msg" 
-         style="margin-top:10px; font-family:'Tiny5'; color:#00ff00; text-shadow:0 0 6px #00ff00;">
-    </div>
+    <div id="msg" class="sugerencias-msg"></div>
 </div>
 
-
-<!-- Firebase -->
+<!-- Firebase Compat (v9.22.2) -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
@@ -68,28 +100,45 @@
         let text = sugBox.value.trim();
 
         if (!text) {
+            msg.style.color = "#ff3333";
             msg.textContent = "No puedes enviar un mensaje vacío.";
+            return;
+        }
+
+        if (text.length > 300) {
+            msg.style.color = "#ff3333";
+            msg.textContent = "El mensaje no puede superar los 300 caracteres.";
             return;
         }
 
         sendBtn.disabled = true;
         sendBtn.textContent = "Enviando...";
+        msg.style.color = "#00ff00";
+        msg.textContent = "";
 
         try {
-            await db.ref("sugerencias").push({
-                mensaje: text,
-                fecha: new Date().toISOString()
-            });
+            // Enviamos exactamente 'texto' y 'timestamp' para coincidir con las reglas
+// Obtener fecha y hora entendible (ej: "9/10/2026, 19:44:00")
+// Creamos una clave basada en la fecha y hora actual (ej: "2026-10-09_19-47-52")
+const ahora = new Date();
+const idFecha = ahora.toISOString().replace(/T/, '_').replace(/:/g, '-').split('.')[0];
 
-            msg.textContent = "¡Sugerencia enviada!";
+// Guardamos usando .set() con esa clave específica
+await db.ref("sugerencias/" + idFecha).set({
+    texto: text,
+    timestamp: Date.now()
+});
+            msg.style.color = "#00ff00";
+            msg.textContent = "¡Sugerencia enviada con éxito!";
             sugBox.value = "";
         } catch (error) {
-            console.error(error);
-            msg.textContent = "Error al enviar.";
+            console.error("Error al enviar:", error);
+            msg.style.color = "#ff3333";
+            msg.textContent = "Error al enviar la sugerencia.";
+        } finally {
+            sendBtn.disabled = false;
+            sendBtn.textContent = "Enviar";
         }
-
-        sendBtn.disabled = false;
-        sendBtn.textContent = "Enviar";
     };
 </script>
 

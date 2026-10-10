@@ -21,17 +21,14 @@
     background: linear-gradient(to right, #530057, #5900c5);
     color: #ff00cc;
     text-shadow: 0 0 5px #ff00cc;
-    width: 10rem;
-    height: 2rem;
     border: 2px solid #8f4aff;
     box-shadow: 0 0 10px #8f4aff;
-    margin: 10px;
 }
 
 .divisor-line {
     width: 100%;
     border: transparent;
-    background: linear-gradient(to right, transparent, #6b1dd9, transparent);
+    background: linear-gradient(to right, transparent, #7013f3, transparent);
     margin: auto;
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
@@ -92,30 +89,27 @@ h3 {
     <div class="NavBox">
     <span id="Contador">0</span>
     <br>
-    <img src="../IMPORTANTE/Chetos-newbie.webp" alt="elemento cliqueable, Chetos" onclick="Click()" id="Chetos">
+    <img src="../IMPORTANTE/Chetos.webp" alt="elemento cliqueable." onclick="Click()" id="Chetos">
     <div class="divisor-line"></div>
     <br>
-    <h3>Tienda de webadas de aure!!11!1!!</h3>
-    <button id="superc" class="boton" onclick="BotonSnd(); SuperComprar(); BotonSnd()"> Comprar super click (15)
-        <br><h4 class="Desc">Ganas +1 por click</h4>
-    </button>
-        
-    <button id="autoc" class="boton" onclick="BotonSnd(); AutoComprar(); BotonSnd()"> Comprar AutoClick (50)
-        <br><h4 class="Desc">Ganas +1 por segundo</h4>
-    </button>
+    <h3>Tienda de webadas de aure!!11!1!!</h2>
+    <button id="superc" class="boton" onclick="BotonSnd(); SuperComprar(); BotonSnd()"> Comprar super click</button>
+    <br>
+    <button id="autoc" class="boton" onclick="BotonSnd(); AutoComprar(); BotonSnd()"> Comprar AutoClick</button>
     <div class="divisor-line"></div>
     <button class="boton" onclick="BotonSnd(); About(); BotonSnd(); ">sobre esta webada</button><br>
     </div>
 <script>
-// Mente maestra que creo esta webada: AURE EL IMB-
-// Se supone que hice un fork para arreglar y mejorar esta vara, pero no entiendo el código, pero pues, persona que hizo la mejora: Yalmil
+// Mente maestra que creo esta madr: AURE EL IMBEC-
 
 // Variables
-let url = window.location.href;
 let Clicks = 0;
 let superclick = 0;
 let AutoC = 0;
-let compC = 0;  
+let ClockClicker = 1000;
+let costs = [
+    1600
+];
 const TimerID = document.getElementById('Timer')
 const ContID = document.getElementById('Contador');
 const superc = document.getElementById('superc');
@@ -123,24 +117,16 @@ const autoc = document.getElementById('autoc');
 const ButtSnd = new Audio('../Snd/XP.mp3');
 const ButtDir = document.getElementsByClassName('boton');
 
-// Verificar URL
+// yokeze
 
-if (url.includes("https://aure.pages.dev")) {
-    console.log("URL CORRECTA");
-}
-else if (url.includes("https://aurecomay.github.io")) {
-    redirect("https://aure.pages.dev/Util/Clicker.html");
-}
-else if (url.includes("http://127.0.0.1")) {
-    console.log("Activado en modo desarrollo")
-    document.write("<h5>version: DBUILD")
-
-}
-else {
-    document.write("<h1>Ocurrio un error, intenta de nuevo, si el error persiste, reportalo a: https://aure.pages.dev/bug-report</h1>");
+if (localStorage.getItem('Clicks')) Clicks = parseInt(localStorage.getItem('Clicks'));
+if (localStorage.getItem('superclick')) superclick = parseInt(localStorage.getItem('superclick'));
+if (localStorage.getItem('AutoC')) AutoC = parseInt(localStorage.getItem('AutoC'));
+if (localStorage.getItem('costs')) {
+    costs = JSON.parse(localStorage.getItem('costs'));
 }
 
-// Función Sonido
+// Funciones
 
 function BotonSnd() {
 
@@ -149,17 +135,7 @@ function BotonSnd() {
     ButtSnd.play();
 }
 
-
-// GD
-
-function Geometrydash() {
-    console.log("URL: " + url); 
-}
-
-Geometrydash();
-
-// Click función.
-
+// funcion click basica, funciona y no se por qu-
 function Click() { 
 if (superclick > 1) { 
 
@@ -170,37 +146,32 @@ Clicks += 1
 }
 };
 
-// SuperClick
-
 function SuperComprar() {
 
-if (Clicks >= 15) {
+if (Clicks > 14) {
 
 Clicks -= 15
 superclick += 2
-compC += 1
 }
 else {
 
-alert('No tienes suficientes clicks wn')
+alert('No tienes suficientes clicks w')
 
 }
 
 };
 
-// AutoClick
-
 function AutoComprar() {
 
-if (Clicks >= 50) {
+if (Clicks > 49) {
 
 Clicks -= 50
 AutoC += 1
-compC += 1
+
 }
 else {
 
-alert('No tienes suficientes clicks wn')
+alert('No tienes suficientes clicks')
 
 }
 
@@ -208,22 +179,47 @@ alert('No tienes suficientes clicks wn')
 
 function About() {
 
-alert('Holipi (más femboy eso), soy Yalmil, yo si soy buena persona, así que reporta bugs aquí: https://aure.pages.dev/bug-report. Lo leeré habitualmente, así que se arregleran pronto :D')
+alert('Oa, soy aure, y si tiene algun bug esta cochinada, pos te pido amablemente que te vayas a la mierd- por que no lo souluciono hasta la 4.1 de aure pages')
+alert("Holipi (más femboy eso), soy Yalmil, yo si soy buena persona, así que reporta bugs aquí: https://aure.pages.dev/bug-report. Lo leeré habitualmente, así que se arregleran pronto :D")
 };
 
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+async function Reset() {
+    localStorage.clear
+    localStorage.removeItem('costs');
+    Clicks = 0
+    superclick = 0
+    AutoC = 0
+    costs = [0]
+    console.log('Juego reiniciado, recargando')
+    await wait(500)
+    location.reload();
+}
 
 // Actualizadores
 // si se, esta wea seguro es ineficiente.
 setInterval(() => {
     ContID.textContent = `${Clicks}`;
-}, 1);
-    
+}, 50);
 
 setInterval(() => {
     if (AutoC > 0) {
     Clicks += AutoC
     }
-}, 1);
+else {
+    console.log('cucumber504 (Autoclicker aplicado)')
+}
+}, ClockClicker);
+
+setInterval(() => {
+    localStorage.setItem('Clicks', Clicks);
+    localStorage.setItem('superclick', superclick);
+    localStorage.setItem('AutoC', AutoC);
+    localStorage.setItem('costs', JSON.stringify(costs));
+    console.log('Cucumber505 (Guardado exitodsamente)')
+}, 5000);
+
 </script>
 </body>
 </html>

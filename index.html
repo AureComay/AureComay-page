@@ -9,20 +9,17 @@
     margin: 0;
     padding: 0;
 }
-@keyframes Fade-OutPurple {
-0% {opacity: 100%; z-index: 9999; background-color: #490080;}
-99% {opacity: 0%; z-index: 9999; background: transparent;}
-}
 
-#PurpleOverlay {
-    z-index: -99999;
-    background-color: transparent;
-    width: 200000vw;
-    height: 200000vh;
-    position: fixed;
-    padding: 0;
-    margin: 0;
-    animation: Fade-OutPurple 2s ease-in-out forwards;
+#DukDiv {
+    font-family: 'Bytesized', sans-serif;
+    text-align: center;
+    font-size: 2rem;
+    background: linear-gradient(to right, #b05490, #783380, #26093e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 10s ease-in-out infinite !important;
+    background-size: 400% 100%;
 }
     </style>
     <style id="scrollglitch"></style>
@@ -37,9 +34,8 @@
 <body>
     <div id="PurpleOverlay">
     </div>
-    <audio id="bm" src="Snd/Chanfle.mp3" autoplay loop preload="metadata"></audio>
     <h1>AureComay's page :D</h1>
-    <h2><span id="text1"></span><span Id="Duck1" onclick="Sound()" onclick="">Duk</span><span id="text2"></span></h2>
+    <div id="DukDiv"><span id="text1"></span><span Id="Duck1" onclick="Sound()" onclick="">Duk</span><span id="text2"></span></div>
     <div class="NavBox">
         <a href="Projectos.html">Mis Projectos</a><br><br>
         <a href="SobreMi.html">Sobre mi</a><br><br>
@@ -59,16 +55,12 @@ function Sound() {
     Duck.play();
 }
     </script>
-    <script>
-// Hay musica mejor asi que luego veo que usar asi que inabilitare la musica de aqui
-document.getElementById('bm').volume = 0;
-    </script>
     <script src="ScrollbarAnim.js">// revisa el script antes de integrarlo, ahi estan escritas las dependencias.</script>
     <script> // esto es el coso que selecciona el texto aleatorio del H2 del Duk
 
 // aqui defino las variables
 const Duk1 = ["epik ", "teh ", "teh epik "];
-const Duk2 = [" is a lie", "!1!!111!", " is coming!!1111!!", " is over", " is ded", " is here", " is epik"];
+const Duk2 = [" ", "!1!!111!", " is coming!!1111!!", "", "", "", ""];
 const dukt1 = document.getElementById("text1");
 const dukt2 = document.getElementById("text2");
 const DukS1 = Duk1[Math.floor(Math.random() * Duk1.length)];

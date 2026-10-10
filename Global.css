@@ -21,8 +21,7 @@ h1 {
     font-family: 'Tiny5', sans-serif;
     margin-top: 10px;
     text-align: center;
-    background: linear-gradient(to right, #6666ff, #8400ff , #ea00ff, #f31bda, #30fc59, #ff9849);
-    -webkit-background-clip: text;
+    background: linear-gradient(to right, #bf00f9 0%,#6700f7 29%,#0004ff 53%,#0033ff 82%,#008cff 100%);    -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     animation: rainbow_animation 30s ease-in-out infinite !important;
@@ -32,19 +31,16 @@ h1 {
 h2 {
     font-family: 'Bytesized', sans-serif;
     text-align: center;
-    background: linear-gradient(to right, #b05490, #783380, #26093e);
+    background: linear-gradient(to right, #f306a0, #cf09e6, #8c00ff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: rainbow_animation 10s ease-in-out infinite !important;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
     background-size: 400% 100%;
 }
 
 
 @keyframes NAVBOX_ANIM {
-0%,100% {box-shadow: 0 0 25px #c61dd9; border: 2px solid #7e1dd9; background: #30164361;backdrop-filter: blur(6px);-webkit-backdrop-filter: blur(6px);transform: rotate(2deg);border-radius: 16px;}
-50% {box-shadow: 0 0 1px #580e60; border: 2px solid #441175; background: #21102d61;backdrop-filter: blur(2px);
--webkit-backdrop-filter: blur(2px);transform: rotate(-2deg);border-radius: 4px;}
 }
 
 @keyframes rainbow_animation {
@@ -83,13 +79,13 @@ a {
     text-align: center;
     background: #30164361;
     margin: auto;
-    width: 30%;
+    width: 35%;
     height: 20%;
     margin-top: 16%;
     margin-bottom: 15%;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    border: 2px solid #7e1dd9;
+    border: 2px solid #661daa;
     box-shadow: 0 0 15px #c61dd9;
     animation: NAVBOX_ANIM 4s ease-in-out infinite !important;
     padding: 20px;
@@ -107,4 +103,21 @@ footer {
 ::-webkit-scrollbar-thumb {
     border-radius: 0px;
     background:#9009ff;
+}
+
+/* De index html pero lo puse aki para k pueda ser usado en otros archivos */
+@keyframes Fade-OutPurple {
+0% {opacity: 100%; z-index: 9999; background-color: #490080;}
+99% {opacity: 0%; z-index: 9999; background: transparent;}
+}
+
+#PurpleOverlay {
+    z-index: -9999999999;
+    background-color: transparent;
+    width: 200000vw;
+    height: 200000vh;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    animation: Fade-OutPurple 560ms ease-in-out forwards;
 }
