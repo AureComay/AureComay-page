@@ -1,119 +1,367 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Encriptador - Aure Pages</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../Global.css">
-<style>
-  /* Estilos específicos de esta sección */
-  .crypt-container {
-    width: 90%;
-    max-width: 500px;
-    margin: 5% auto;
-    padding: 20px;
-    text-align: center;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador epiko - ACP</title>
+    
+    <link rel="stylesheet" href="../Global.css">
+    <link rel="icon" type="image/png" href="../Aurecomay's page icons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../Aurecomay's page icons/favicon.svg" />
+    <link rel="shortcut icon" href="../Aurecomay's page icons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../Aurecomay's page icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="AureComay's page" />
+    <link rel="manifest" href="../Aurecomay's page icons/site.webmanifest" />
 
-  .crypt-textarea {
-    width: 100%;
-    height: 100px;
-    background: #000000b6;
-    color: #00ff00;
-    border: 2px solid #00ff00;
-    margin-top: 10px;
-    font-family: 'Pixelify Sans', monospace;
-    backdrop-filter: blur(10px);
-    resize: vertical;
-    box-sizing: border-box;
-    padding: 10px;
-  }
+    <style>
+        .NavBox {
+            min-width: 250px;
+            max-width: 600px;
+            width: 85%;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+            padding: 25px;
+        }
 
-  .crypt-btn-group {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
+        .boton {
+            background: linear-gradient(to right, #530057, #1b003d);
+            color: #ff00cc;
+            min-width: 7rem;
+            padding: 0.5rem 1rem;
+            height: auto;
+            border: 2px solid #6200ff;
+            box-shadow: 0 0 10px #6200ff;
+            margin: 5px;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
 
-  .crypt-btn {
-    padding: 10px 15px;
-    background: #4b0082;
-    color: #00ff00;
-    border: 2px solid #008f00;
-    cursor: pointer;
-    font-family: 'Bytesized', sans-serif;
-    transition: 0.2s;
-  }
+        .boton:hover {
+            background: linear-gradient(to right, #530057, #5900c5);
+            color: #ff00cc;
+            text-shadow: 0 0 5px #ff00cc;
+            border: 2px solid #8f4aff;
+            box-shadow: 0 0 10px #8f4aff;
+        }
 
-  .crypt-btn:hover {
-    background: #6a0ded;
-    box-shadow: 0 0 8px #00ff00;
-  }
-</style>
+        .BotonGrande {
+            font-size: 1.1rem;
+            background: linear-gradient(to right, #530057, #1b003d);
+            color: #ff00cc;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #6200ff;
+            box-shadow: 0 0 10px #6200ff;
+            margin: 10px;
+            cursor: pointer;
+            font-family: sans-serif;
+        }
+
+        .BotonGrande:hover {
+            background: linear-gradient(to right, #530057, #5900c5);
+            color: #ff00cc;
+            text-shadow: 0 0 5px #ff00cc;
+            border: 2px solid #8f4aff;
+            box-shadow: 0 0 10px #8f4aff;
+        }
+
+        .divisor-line {
+            width: 100%;
+            border: transparent;
+            background: linear-gradient(to right, transparent, #7013f3, transparent);
+            margin: auto;
+            margin-top: 1.2rem;
+            margin-bottom: 1.2rem;
+            padding: 1.2px;
+        }
+
+        /* Estilos propios de los campos */
+        .etiqueta-cifrado {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ff92ed;
+            font-weight: bold;
+            font-size: 0.95rem;
+            text-shadow: 0 0 5px #f700ce;
+        }
+
+        .selector-cifrado, .caja-texto {
+            width: 100%;
+            padding: 0.6rem;
+            background: #140524;
+            border: 2px solid #6200ff;
+            border-radius: 6px;
+            color: #00ffcc;
+            font-family: monospace;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+            outline: none;
+            box-shadow: inset 0 0 8px rgba(98, 0, 255, 0.5);
+        }
+
+        .selector-cifrado:focus, .caja-texto:focus {
+            border-color: #ff00cc;
+            box-shadow: 0 0 10px #ff00cc;
+        }
+
+        .caja-texto {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .acciones-cifrado {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .estado-mensaje {
+            font-size: 0.9rem;
+            color: #ff3366;
+            min-height: 1.2rem;
+            margin-top: 0.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 5px #ff3366;
+        }
+    </style>
 </head>
 <body>
-<h1>Encripador epiko</h1>
-<h2><a href="Utilidades.html">← Volver a utilidades</a></h2>
 
-<div class="NavBox crypt-container">
-    <h2>Encriptador Secreto</h2>
+    <div id="PurpleOverlay"></div>
 
-    <textarea id="inputText" class="crypt-textarea" placeholder="Escribe tu mensaje o pégalo para desencriptar..."></textarea>
-    
-    <div class="crypt-btn-group">
-        <button onclick="encriptar()" class="crypt-btn">🔒 Encriptar</button>
-        <button onclick="desencriptar()" class="crypt-btn">🔓 Desencriptar</button>
+    <h1>Encriptador epiko</h1>
+    <h2><a href="../Utilidades.html"><button class="BotonGrande">Volver a utilidades</button></a></h2>
+
+    <div class="NavBox">
+        <div style="margin-bottom: 1rem;">
+            <label for="metodoCifrado" class="etiqueta-cifrado">Método de cifrado:</label>
+            <select id="metodoCifrado" class="selector-cifrado">
+                <option value="base64">Base64</option>
+                <option value="base32">Base32</option>
+                <option value="base16">Hexadecimal</option>
+                <option value="rot13">ROT13</option>
+                <option value="cesar">Cifrado cesar</option>
+                <option value="morse">Código Morse</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="textoEntrada" class="etiqueta-cifrado">Entrada:</label>
+            <textarea id="textoEntrada" class="caja-texto" placeholder="Escribe tu texto o código aquí..."></textarea>
+        </div>
+
+        <div class="acciones-cifrado">
+            <button id="btnCodificar" class="boton" onclick="BotonSnd()">Codificar</button>
+            <button id="btnDecodificar" class="boton" onclick="BotonSnd()">Decodificar</button>
+            <button id="btnLimpiar" class="boton" onclick="BotonSnd()">Limpiar</button>
+        </div>
+
+        <div class="divisor-line"></div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="textoSalida" class="etiqueta-cifrado">Resultado:</label>
+            <textarea id="textoSalida" class="caja-texto" readonly placeholder="El resultado aparecerá aquí..."></textarea>
+        </div>
+
+        <div class="acciones-cifrado">
+            <button id="btnCopiar" class="boton" onclick="BotonSnd()">Copiar Resultado</button>
+        </div>
+
+        <div id="mensajeEstado" class="estado-mensaje"></div>
     </div>
 
-    <textarea id="outputText" class="crypt-textarea" readonly placeholder="Resultado..."></textarea>
-    
-    <button onclick="copiar()" class="crypt-btn" style="margin-top:10px;">📋 Copiar Resultado</button>
-</div>
+    <footer>
+        <a href="../Terminos-y-condiciones.html">AureComay's page | Ningun derecho reservado 2025-2026</a>
+    </footer>
 
-<script>
-    // Usa un cifrado Base64 invertido + sustitución para que se vea súper cryptico
-    function encriptar() {
-        let texto = document.getElementById("inputText").value;
-        if (!texto) return;
-
-        // Convertimos a UTF-8 Base64 seguro para soportar emojis y tildes
-        let encoded = btoa(unescape(encodeURIComponent(texto)));
-        
-        // Invertimos la cadena y le agregamos un toque retro
-        let invertido = encoded.split("").reverse().join("");
-        document.getElementById("outputText").value = "AURE-" + invertido;
-    }
-
-    function desencriptar() {
-        let texto = document.getElementById("inputText").value.trim();
-        if (!texto) return;
-
-        try {
-            // Quitamos el prefijo si lo tiene
-            if (texto.startsWith("AURE://")) {
-                texto = texto.replace("AURE-", "");
-            }
-
-            // Volvemos a invertir la cadena
-            let revertido = texto.split("").reverse().join("");
-            
-            // Decodificamos el Base64
-            let decoded = decodeURIComponent(escape(atob(revertido)));
-            document.getElementById("outputText").value = decoded;
-        } catch (e) {
-            document.getElementById("outputText").value = "❌ ERROR: Código inválido o corrupto.";
+    <script>
+        // Sonido de los botones
+        const ButtSnd = new Audio('../Snd/XP.mp3');
+        function BotonSnd() {
+            ButtSnd.currentTime = 0; 
+            ButtSnd.play();
         }
-    }
 
-    function copiar() {
-        let out = document.getElementById("outputText");
-        if (!out.value) return;
-        out.select();
-        navigator.clipboard.writeText(out.value);
-        alert("¡Resultado copiado al portapapeles!");
-    }
-</script>
+        // --- ALGORITMOS ---
+// --- FUNCIONES PARA BASE16 (HEXADECIMAL) ---
+function codificarBase16(texto) {
+    const bytes = new TextEncoder().encode(texto);
+    return Array.from(bytes)
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('')
+        .toUpperCase();
+}
 
+function decodificarBase16(hex) {
+    const hexLimpio = hex.replace(/\s+/g, '');
+    if (hexLimpio.length % 2 !== 0) throw new Error("Hexadecimal no válido");
+    
+    const bytes = new Uint8Array(hexLimpio.length / 2);
+    for (let i = 0; i < hexLimpio.length; i += 2) {
+        bytes[i / 2] = parseInt(hexLimpio.substr(i, 2), 16);
+    }
+    return new TextDecoder().decode(bytes);
+}
+
+// --- FUNCIONES PARA CIFRADO CÉSAR (+3) ---
+function cesarCodificar(texto, desplazamiento = 3) {
+    return texto.replace(/[a-zA-Z]/g, c => {
+        const base = c <= 'Z' ? 65 : 97;
+        return String.fromCharCode((c.charCodeAt(0) - base + desplazamiento) % 26 + base);
+    });
+}
+
+function cesarDecodificar(texto, desplazamiento = 3) {
+    return texto.replace(/[a-zA-Z]/g, c => {
+        const base = c <= 'Z' ? 65 : 97;
+        return String.fromCharCode((c.charCodeAt(0) - base - desplazamiento + 26) % 26 + base);
+    });
+}
+        
+        function rot13(cadena) {
+            return cadena.replace(/[a-zA-Z]/g, function(c) {
+                return String.fromCharCode(
+                    (c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26
+                );
+            });
+        }
+
+        const ALFABETO_BASE32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+        
+        function codificarBase32(cadena) {
+            const bytes = new TextEncoder().encode(cadena);
+            let bits = "";
+            let resultado = "";
+            for (let i = 0; i < bytes.length; i++) {
+                bits += bytes[i].toString(2).padStart(8, "0");
+            }
+            for (let i = 0; i < bits.length; i += 5) {
+                let bloque = bits.substr(i, 5);
+                if (bloque.length < 5) bloque = bloque.padEnd(5, "0");
+                resultado += ALFABETO_BASE32[parseInt(bloque, 2)];
+            }
+            while (resultado.length % 8 !== 0) resultado += "=";
+            return resultado;
+        }
+
+        function decodificarBase32(cadena) {
+            const cadenaLimpia = cadena.replace(/=+$/, "").toUpperCase();
+            let bits = "";
+            for (let i = 0; i < cadenaLimpia.length; i++) {
+                const indice = ALFABETO_BASE32.indexOf(cadenaLimpia[i]);
+                if (indice === -1) throw new Error("Carácter no válido");
+                bits += indice.toString(2).padStart(5, "0");
+            }
+            const bytes = [];
+            for (let i = 0; i + 8 <= bits.length; i += 8) {
+                bytes.push(parseInt(bits.substr(i, 8), 2));
+            }
+            return new TextDecoder().decode(new Uint8Array(bytes));
+        }
+
+        const MAPA_MORSE = {
+            'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+            'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+            'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+            'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+            'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--',
+            '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..',
+            '9': '----.', '0': '-----', ' ': '/'
+        };
+
+        const MAPA_MORSE_INVERSO = Object.fromEntries(
+            Object.entries(MAPA_MORSE).map(([k, v]) => [v, k])
+        );
+
+        function textoAMorse(texto) {
+            return texto.toUpperCase().split('').map(caracter => MAPA_MORSE[caracter] || caracter).join(' ');
+        }
+
+        function morseATexto(morse) {
+            return morse.trim().split(' ').map(simbolo => MAPA_MORSE_INVERSO[simbolo] || simbolo).join('').replace(/\//g, ' ');
+        }
+
+        // --- MANEJO DOM ---
+
+        const textoEntrada = document.getElementById('textoEntrada');
+        const textoSalida = document.getElementById('textoSalida');
+        const metodoCifrado = document.getElementById('metodoCifrado');
+        const mensajeEstado = document.getElementById('mensajeEstado');
+
+        function limpiarEstado() {
+            mensajeEstado.textContent = '';
+            mensajeEstado.style.color = '#ff3366';
+        }
+
+        document.getElementById('btnCodificar').addEventListener('click', () => {
+            limpiarEstado();
+            const texto = textoEntrada.value;
+            const metodo = metodoCifrado.value;
+
+            try {
+                if (metodo === 'base64') {
+                    textoSalida.value = btoa(unescape(encodeURIComponent(texto)));
+                } else if (metodo === 'base32') {
+                    textoSalida.value = codificarBase32(texto);
+                } else if (metodo === 'base16') {
+                    textoSalida.value = codificarBase16(texto);
+                } else if (metodo === 'rot13') {
+                    textoSalida.value = rot13(texto);
+                } else if (metodo === 'cesar') {
+                    textoSalida.value = cesarCodificar(texto);
+                }else if (metodo === 'morse') {
+                    textoSalida.value = textoAMorse(texto);
+                } 
+            } catch (err) {
+                mensajeEstado.textContent = 'Error al codificar la entrada w.';
+            }
+        });
+
+        document.getElementById('btnDecodificar').addEventListener('click', () => {
+            limpiarEstado();
+            const texto = textoEntrada.value.trim();
+            const metodo = metodoCifrado.value;
+
+            try {
+                if (metodo === 'base64') {
+                    textoSalida.value = decodeURIComponent(escape(atob(texto)));
+                } else if (metodo === 'base32') {
+                    textoSalida.value = decodificarBase32(texto);
+                } else if (metodo === 'base16') {
+                    textoSalida.value = decodificarBase16(texto);
+                } else if (metodo === 'rot13') {
+                    textoSalida.value = rot13(texto);
+                } else if (metodo === 'cesar') {
+                    textoSalida.value = cesarDecodificar(texto);
+                } else if (metodo === 'morse') {
+                    textoSalida.value = morseATexto(texto);
+                }
+            } catch (err) {
+                mensajeEstado.textContent = 'Error al decodificar: formato no válido.';
+            }
+        });
+
+        document.getElementById('btnLimpiar').addEventListener('click', () => {
+            textoEntrada.value = '';
+            textoSalida.value = '';
+            limpiarEstado();
+        });
+
+        document.getElementById('btnCopiar').addEventListener('click', () => {
+            limpiarEstado();
+            if (!textoSalida.value) return;
+            
+            navigator.clipboard.writeText(textoSalida.value).then(() => {
+                mensajeEstado.style.color = '#00ffcc';
+                mensajeEstado.textContent = '¡Copiado al portapapeles!';
+                setTimeout(limpiarEstado, 2500);
+            }).catch(() => {
+                mensajeEstado.textContent = 'Error al copiar.';
+            });
+        });
+    </script>
+    <script src="..\matrix.js"></script>
 </body>
 </html>
