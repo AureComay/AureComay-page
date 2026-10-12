@@ -2,7 +2,7 @@
 // esta cosa requiere el siguiente tag, no lo olvides: <style id="scrollglitch"></style>.
 // integralo con script:src o script normal. recomiendo src para que esta wea pueda ser actualizada y los cambios se reflejen en todos los archivos integrados.
 
-const glitchColors = ["#9009ff", "#6406b1", "#4e0688", "#3b0766", "#280446", "#130222",
+const glitchColors = ["#ff4f09", "#b14506", "#884506", "#662507", "#462404", "#220902",
 
 ];
 const glitchTag = document.getElementById("scrollglitch");
@@ -16,4 +16,4 @@ setInterval(() => {
             box-shadow: 0 0 8px ${c};
         }
     `;
-}, 50);
+}, 500);

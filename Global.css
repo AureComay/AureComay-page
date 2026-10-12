@@ -21,8 +21,7 @@ h1 {
     font-family: 'Tiny5', sans-serif;
     margin-top: 10px;
     text-align: center;
-    background: linear-gradient(to right, #6666ff, #8400ff , #ea00ff, #f31bda, #30fc59, #ff9849);
-    -webkit-background-clip: text;
+    background: linear-gradient(to right, #f9b700 0%,#f78400 29%,#ff6600 53%,#ff4800 82%,#ff0000 100%);    -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     animation: rainbow_animation 30s ease-in-out infinite !important;
@@ -32,19 +31,16 @@ h1 {
 h2 {
     font-family: 'Bytesized', sans-serif;
     text-align: center;
-    background: linear-gradient(to right, #b05490, #783380, #26093e);
+    background: linear-gradient(to right, #f37106, #e64f09, #ff3300);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: rainbow_animation 10s ease-in-out infinite !important;
+    animation: rainbow_animation 5s ease-in-out infinite !important;
     background-size: 400% 100%;
 }
 
 
 @keyframes NAVBOX_ANIM {
-0%,100% {box-shadow: 0 0 25px #c61dd9; border: 2px solid #7e1dd9; background: #30164361;backdrop-filter: blur(6px);-webkit-backdrop-filter: blur(6px);transform: rotate(2deg);border-radius: 16px;}
-50% {box-shadow: 0 0 1px #580e60; border: 2px solid #441175; background: #21102d61;backdrop-filter: blur(2px);
--webkit-backdrop-filter: blur(2px);transform: rotate(-2deg);border-radius: 4px;}
 }
 
 @keyframes rainbow_animation {
@@ -67,12 +63,12 @@ h2 {
 a:hover {
     margin-top: 10px;
     text-align: center;
-    color: #ff92ed;
+    color: #ffc792;
     background-size: 400% 100%;
 }
 
 a {
-    color: #f700ce;
+    color: #f77700;
     text-decoration: none;
 }
 
@@ -81,30 +77,60 @@ a {
     min-height: 100px;
     border-radius: 8px;
     text-align: center;
-    background: #30164361;
+    background: #74481e48;
     margin: auto;
-    width: 30%;
+    width: 35%;
     height: 20%;
     margin-top: 16%;
     margin-bottom: 15%;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 2px solid #7e1dd9;
-    box-shadow: 0 0 15px #c61dd9;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 2px solid #aa5d1d;
+    box-shadow: 0 0 15px #d9721d;
     animation: NAVBOX_ANIM 4s ease-in-out infinite !important;
     padding: 20px;
+    box-sizing: content-box;
 
 }
 
+.divisor-line {
+    width: 100%;
+    border: transparent;
+    background: linear-gradient(to right, transparent, #d9781d, transparent);
+    margin: auto;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    padding: 1.2px;
+}
+
+
 footer {
     text-align: center;
-    text-shadow: 0 0 10px #fefffe28;
+    text-shadow: 0 0 10px #ff7b0059;
     margin-bottom: 20px;
 }
 
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background:#291538; }
+::-webkit-scrollbar-track { background:#382215; }
 ::-webkit-scrollbar-thumb {
     border-radius: 0px;
-    background:#9009ff;
+    background:#ff8c09;
 }
+
+/* De index html pero lo puse aki para k pueda ser usado en otros archivos */
+/* Ya nisiquiera es morado por la actu de jaluwin*/
+@keyframes Fade-OutPurple {
+0% {opacity: 100%; z-index: 9999; background-color: #ff8800;}
+99% {opacity: 0%; z-index: 9999; background: transparent;}
+}
+
+#PurpleOverlay {
+    z-index: -9999999999;
+    background-color: transparent;
+    width: 200000vw;
+    height: 200000vh;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    animation: Fade-OutPurple 560ms ease-in-out forwards;
+}   
