@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Sugerencias - Aure Pages</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="Global.css">
+    <link rel="icon" type="image/png" href="Aurecomay's page icons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="Aurecomay's page icons/favicon.svg" />
+    <link rel="shortcut icon" href="Aurecomay's page icons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Aurecomay's page icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="AureComay's page" />
+    <link rel="manifest" href="Aurecomay's page icons/site.webmanifest" />
+<style>
+  .sugerencias-container {
+    width: 90%;
+    max-width: 450px;
+    margin: 5% auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .sugerencias-textarea {
+    width: 100%;
+    height: 120px;
+    background: #000000b6;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    margin-top: 15px;
+    font-family: 'Pixelify Sans', sans-serif;
+    backdrop-filter: blur(10px);
+    resize: vertical;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+
+  .sugerencias-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #4b0082;
+    color: #00ff00;
+    border: 2px solid #008f00;
+    cursor: pointer;
+    font-family: 'Bytesized', sans-serif;
+    transition: 0.2s;
+  }
+
+  .sugerencias-btn:hover {
+    background: #6a0ded;
+    box-shadow: 0 0 8px #00ff00;
+  }
+
+  .sugerencias-msg {
+    margin-top: 15px;
+    font-family: 'Tiny5', sans-serif;
+    color: #00ff00;
+    text-shadow: 0 0 6px #00ff00;
+    min-height: 20px;
+  }
+</style>
+</head>
+<body>
+<h1>Bug reports.</h1>
+<h2><a href="Utilidades.html">← Volver a utilidades</a></h2>
+
+<div class="NavBox sugerencias-container">
+    <h2>Enviar un bug report</h2>
+
+    <textarea id="sugBox" class="sugerencias-textarea" placeholder="Describe el bug..." maxlength="300"></textarea>
+    <br>
+
+    <button id="sendBtn" class="sugerencias-btn">Enviar</button>
+
+    <div id="msg" class="sugerencias-msg"></div>
+</div>
+
+<!-- Firebase Compat (v9.22.2) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDyKCSJI1cx8THyVTPrNPscbVMgffEkknk",
+        authDomain: "aurecomaypages.firebaseapp.com",
+        databaseURL: "https://aurecomaypages-default-rtdb.firebaseio.com/",
+        projectId: "aurecomaypages",
+        storageBucket: "aurecomaypages.firebasestorage.app",
+        messagingSenderId: "538178961737",
+        appId: "1:538178961737:web:00528dddf5c4091c09da98"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const sugBox = document.getElementById("sugBox");
+    const sendBtn = document.getElementById("sendBtn");
+    const msg = document.getElementById("msg");
+
+    sendBtn.onclick = async () => {
+        let text = sugBox.value.trim();
+
+        if (!text) {
+            msg.style.color = "#ff3333";
+            msg.textContent = "No puedes enviar un bugreport vacío.";
+            return;
+        }
+
+        if (text.length > 300) {
+            msg.style.color = "#ff3333";
+            msg.textContent = "El mensaje no puede superar los 300 caracteres.";
+            return;
+        }
+
+        sendBtn.disabled = true;
+        sendBtn.textContent = "Enviando...";
+        msg.style.color = "#00ff00";
+        msg.textContent = "";
+
+        try {
+            // Enviamos exactamente 'texto' y 'timestamp' para coincidir con las reglas
+// Obtener fecha y hora entendible (ej: "9/10/2026, 19:44:00")
+// Creamos una clave basada en la fecha y hora actual (ej: "2026-10-09_19-47-52")
+const ahora = new Date();
+const idFecha = ahora.toISOString().replace(/T/, '_').replace(/:/g, '-').split('.')[0];
+
+// Guardamos usando .set() con esa clave específica
+await db.ref("bugreports/" + idFecha).set({
+    texto: text,
+    timestamp: Date.now()
+});
+            msg.style.color = "#00ff00";
+            msg.textContent = "bugreport enviado con éxito.";
+            sugBox.value = "";
+        } catch (error) {
+            console.error("Error al enviar:", error);
+            msg.style.color = "#ff3333";
+            msg.textContent = "Error al enviar el bugreport.";
+        } finally {
+            sendBtn.disabled = false;
+            sendBtn.textContent = "Enviar";
+        }
+    };
+</script>
+    <script src="matrix.js"></script>
+</body>
+</html>
