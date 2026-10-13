@@ -98,6 +98,7 @@ h3 {
     <button id="autoc" class="boton" onclick="BotonSnd(); AutoComprar(); BotonSnd()"> Comprar AutoClick ($50)</button>
     <div class="divisor-line"></div>
     <button class="boton" onclick="BotonSnd(); About(); BotonSnd(); ">sobre esta webada</button><br>
+    <button class="boton" onClick="Reset(); ">Reiniciar progreso</button><br>
     </div>
 <script>
 // Mente maestra que creo esta madr: AURE EL IMBEC-
@@ -186,7 +187,7 @@ alert("Holipi (más femboy eso), soy Yalmil, yo si soy buena persona, así que r
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function Reset() {
-    localStorage.clear
+    localStorage.clear();
     localStorage.removeItem('costs');
     Clicks = 0
     superclick = 0
