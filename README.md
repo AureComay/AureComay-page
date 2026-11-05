@@ -21,7 +21,7 @@ En  Utilidades está lo principal de la página actualmente en esta categoría s
 <br>
 <h3>Mis proyectos.</h3>
 
-En Mis projectos se encuentran todas las cosas creadas por AureComay:<br>
+En Mis proyectos se encuentran todas las cosas creadas por AureComay:<br>
 - Letterballs wiki: wiki del lore del Reino Letterballs, historia creada principalmente por AureComay y Saantybl. <br>
 - Mi yutuv ekisde: canal de AureComay de Youtube.<br>
 - Servidor de loz randoms, obvio: servidor de Discord sobre el grupo de amigos "Los Randoms".<br>
